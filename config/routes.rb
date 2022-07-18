@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'contract/index'
+  resources :contracts
+  resources :contract
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
