@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_many: :contracts, dependent: :destroy
+
     validates :name, presence: true
     validates :surname, presence: true
     validates :doc_id, presence: true
