@@ -18,7 +18,7 @@ RSpec.describe Contract, :type => :model do
                         status:0,
                         user_id: :user1)
     end
-    #contract1 = Contract.new(title: "Anything", desc: "Lorem ipsum", owner: "ok", kind: "fdf", status: 1)
+    
     
     it "is valid with valid attributes" do
         expect(contract1).to be_valid
