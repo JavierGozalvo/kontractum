@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
 		end
 
 		it "having a valid postal code" do
-			non_valid_user = build(:user, postalcode: nil)
+			non_valid_user = build(:user, postalcode: "2222333")
 			expect(non_valid_user).to_not be_valid
 		end
 	end

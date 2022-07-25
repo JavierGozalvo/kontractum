@@ -9,7 +9,7 @@ class User < ApplicationRecord
     validates :birthdate, presence: true, format: {with: /[\d]{1,2}(\-|\/)[\d]{1,2}(\-|\/)[\d]{4}/}
     validates :address, presence: true
     validates :city, presence: true, format: {with: /[A-Z]\D+/}
-    validates :postalcode, presence: true, format: {with: /[0-9]{5}/}
+    validates :postalcode, presence: true, format: {with: /\b\d{5}\b/, message: "Please enter a valid postal code"}
     validate  :is_adult?
 
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
