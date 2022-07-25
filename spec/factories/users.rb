@@ -6,5 +6,8 @@ FactoryBot.define do
     doc_kind {0}
     email {"javo@gmail.com"}
     birthdate {"3/5/1999"}
+    address {"Calle San Onofre"}
+    city {"Torrent, Valencia"}
+    postalcode {"46900"}
   end
 end

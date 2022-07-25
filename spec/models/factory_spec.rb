@@ -30,7 +30,22 @@ RSpec.describe User, type: :model do
 		end
 
 		it "having a valid birthdate" do
-			non_valid_user = build(:user, birthdate: nil)
+			non_valid_user = build(:user, birthdate:"78(67)1900")
+			expect(non_valid_user).to_not be_valid
+		end
+
+		it "having a valid address" do
+			non_valid_user = build(:user, address: nil)
+			expect(non_valid_user).to_not be_valid
+		end
+
+		it "having a valid city" do
+			non_valid_user = build(:user, city: nil)
+			expect(non_valid_user).to_not be_valid
+		end
+
+		it "having a valid postal code" do
+			non_valid_user = build(:user, postalcode: nil)
 			expect(non_valid_user).to_not be_valid
 		end
 	end
