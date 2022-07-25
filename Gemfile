@@ -49,15 +49,15 @@ group :development, :test do
   gem "rspec-rails"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "factory_bot_rails"
+  gem "devise"
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+
   gem "web-console"
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
