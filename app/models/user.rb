@@ -3,22 +3,26 @@ class User < ApplicationRecord
 
     validates :name, presence: true
     validates :surname, presence: true
-    validates :doc_id, presence: true
+    validates :doc_id, presence: true, format: {with: /[\d]{8}[A-Z]{1}/ , message: "Please enter your id in the correct format"}
     validates :doc_kind, presence: true
-    validates :email, presence: true
-    validates :birthdate, presence: true
-    validate :is_adult?
+    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates :birthdate, presence: true, format: {with: /[\d]{1,2}(\-|\/)[\d]{1,2}(\-|\/)[\d]{4}/}
+    validates :address, presence: true
+    validates :city, presence: true, format: {with: /[A-Z]\D+/}
+    validates :postalcode, presence: true, format: {with: /\d{5}/}
+    validate  :is_adult
 
-    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
-    validates :doc_id, format: {with: /[\d]{8}[A-Z]{1}/ , message: "Please enter your id in the correct format"}
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
 
     
-    def is_adult?
-        return false if birthdate.blank? 
-
-        my_bday = Date.parse(birthdate)
-        (Date.today - 18.year) > my_bday && (Date.today - 100.year) < my_bday
+    def is_adult
+        my_bday = Date.parse(birthdate) rescue nil
+        return false if my_bday.blank?
+         
+        if !(((Date.today - 18.year) >= my_bday) && (Date.today - 100.year) <= my_bday)
+          errors.add(:birthdate, "User is not adult")
+        end 
+        
     end
 
 

@@ -1,22 +1,20 @@
 require "rails_helper"
 
 RSpec.describe Contract, :type => :model do
-    let(:user1) do
-        User.new( name: "Javo",
-                  surname: "Cervera",
-                  doc_id: "56378756A",
-                  doc_kind: :passport,
-                  email: "Javo@gmail.com",
-                  birthdate: "3-5-1998")
-                  
-    end
+    
+    user1 = User.new( name: "Javo",
+      surname: "Cervera",
+      doc_id: "56378756A",
+      doc_kind: :passport,
+      email: "Javo@gmail.com",
+      birthdate: "3-5-1998")
 
     let(:contract1) do
         Contract.new(   title:"Renting",
                         desc:"A contract to manage car renting",
                         kind:"Cars",
-                        status:0,
-                        user_id: :user1)
+                        status: :drafted,
+                        user_id: user1)
     end
     
     
