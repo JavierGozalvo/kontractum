@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_093202) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_25_092217) do
   create_table "contracts", force: :cascade do |t|
     t.string "title"
     t.text "desc"
@@ -31,6 +31,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_093202) do
     t.string "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "city"
+    t.string "postalcode"
   end
 
   add_foreign_key "contracts", "users"
