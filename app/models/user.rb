@@ -9,13 +9,13 @@ class User < ApplicationRecord
     validates :birthdate, presence: true, format: {with: /[\d]{1,2}(\-|\/)[\d]{1,2}(\-|\/)[\d]{4}/}
     validates :address, presence: true
     validates :city, presence: true, format: {with: /[A-Z]\D+/}
-    validates :postalcode, presence: true, format: {with: /\d{5}/}
-    validate  :is_adult
+    validates :postalcode, presence: true, format: {with: /[0-9]{5}/}
+    validate  :is_adult?
 
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
 
     
-    def is_adult
+    def is_adult?
         my_bday = Date.parse(birthdate) rescue nil
         return false if my_bday.blank?
          

@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
 		end
 
 		it "having a valid city" do
-			non_valid_user = build(:user, city: nil)
+			non_valid_user = build(:user, city: "torrent")
 			expect(non_valid_user).to_not be_valid
 		end
 
