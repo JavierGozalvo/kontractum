@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
     has_many :contracts, dependent: :destroy
 
     validates :name, presence: true
@@ -10,6 +14,7 @@ class User < ApplicationRecord
     validates :address, presence: true
     validates :city, presence: true, format: {with: /[A-Z]\D+/}
     validates :postalcode, presence: true, format: {with: /\b\d{5}\b/, message: "Please enter a valid postal code"}
+    
     validate  :is_adult?
 
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
