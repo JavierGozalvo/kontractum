@@ -27,6 +27,10 @@ gem "stimulus-rails"
 
 gem "jbuilder"
 
+gem "devise"
+
+gem 'jquery-rails'
+
 
 
 
