@@ -14,10 +14,11 @@ class User < ApplicationRecord
     validates :address, presence: true
     validates :city, presence: true, format: {with: /[A-Z]\D+/, message: "is invalid, please use Uppercase in first letter"}
     validates :postalcode, presence: true, format: {with: /\b\d{5}\b/, message: "is invalid, please enter a correct Postal Code"}
+
     validate  :is_adult?
 
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
-
+    enum :role, {admin: 10, customer: 20, premium_customer: 30, blocked: 1, banned: 0}, default: :customer
     
     def is_adult?
         my_bday = Date.parse(birthdate) rescue nil
@@ -28,6 +29,5 @@ class User < ApplicationRecord
         end 
         
     end
-
 
 end

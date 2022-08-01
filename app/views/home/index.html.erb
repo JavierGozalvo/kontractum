@@ -3,6 +3,12 @@
 <h2>Bienvenid@ de nuevo, <%= current_user.name%></h2>
 <h3>Sesion iniciada: <%= current_user.email%></h3>
 <% if user_signed_in? %>
+
+	<%if current_user.admin?%>
+		<p>There are currently <%= User.count%> active accounts</p>
+	<%end%>
+
+	<p>Your current role is: <%= current_user.role%></p>
 	<%= link_to "LOG OUT", destroy_user_session_path%> 
 
 	<%= link_to "Edit Password", edit_user_registration_path%>
