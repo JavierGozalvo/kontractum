@@ -18,9 +18,8 @@ class User < ApplicationRecord
     validate  :is_adult?
 
     enum :doc_kind, {dni: 0, driver_license: 1, passport: 2}
-    enum :role, {admin: 00, customer: 01, premium_customer: 10, blocked: 0, banned: 1}
-    after_initialize :set_default_role, :if => :new_record?
-
+    enum :role, {admin: 10, customer: 20, premium_customer: 30, blocked: 1, banned: 0}, default: :customer
+    
     def is_adult?
         my_bday = Date.parse(birthdate) rescue nil
         return false if my_bday.blank?
@@ -29,10 +28,6 @@ class User < ApplicationRecord
           errors.add(:birthdate, "User is not adult")
         end 
         
-    end
-
-    def set_default_role
-      self.role ||= :customer
     end
 
 end
