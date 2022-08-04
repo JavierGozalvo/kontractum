@@ -6,6 +6,7 @@
 
 	<%if current_user.admin?%>
 		<p>There are currently <%= User.count%> active accounts</p>
+		<p>There are currently <%= Contract.count%> total contracts created</p>
 	<%end%>
 
 	<p>Your current role is: <%= current_user.role%></p>
