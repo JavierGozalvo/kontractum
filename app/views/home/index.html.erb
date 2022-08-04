@@ -9,10 +9,12 @@
 	<%end%>
 
 	<p>Your current role is: <%= current_user.role%></p>
-	<%= link_to "LOG OUT", destroy_user_session_path%> 
+	<p>You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created</p>
+	 
+	<p><%= link_to "Edit PROFILE", edit_profile_path%>
+	<%= link_to "Edit PASSWORD", edit_user_registration_path%></p>
 
-	<%= link_to "Edit Password", edit_user_registration_path%>
-
-
-	<%= link_to "Edit PROFILE_DEMO", edit_profile_path%>
+	<p><%= link_to "New contract", new_user_contract_path(current_user)%>
+	<%= link_to "See created contracts", user_contracts_url(current_user)%></p>
+	<%= link_to "LOG OUT", destroy_user_session_path%>
 <%end%>
