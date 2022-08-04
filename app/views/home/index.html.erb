@@ -1,7 +1,8 @@
 <h1>Pagina principal de Kontractum</h1>
 
 <h2>Bienvenid@ de nuevo, <%= current_user.name%></h2>
-<h3>Sesion iniciada: <%= current_user.email%></h3>
+<hr/>
+<h3>Dashboard - <%= current_user.email%></h3>
 <% if user_signed_in? %>
 
 	<%if current_user.admin?%>
@@ -11,7 +12,7 @@
 
 	<p>Your current role is: <%= current_user.role%></p>
 	<p>You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created</p>
-	 
+	 <hr/>
 	<p><%= link_to "Edit PROFILE", edit_profile_path%>
 	<%= link_to "Edit PASSWORD", edit_user_registration_path%></p>
 

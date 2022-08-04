@@ -4,6 +4,10 @@
   <%if current_user.admin?%>
     <p>Admin View -- Contract List</p>
   <%end%>
+  <%if Contract.select {|contract| contract.owner == current_user}.count == 0 %>
+    <p>You dont have any contract created right now.</p>
+    <p><%= link_to "Create contract", new_user_contract_path(current_user)%>
+  <%end%>
   <% @contracts.each do |contract| %>
     <%if (current_user && current_user == contract.owner) || current_user.admin?%>   
       <p>
@@ -16,8 +20,9 @@
         <p><strong>Owner: </strong><%= contract.owner.name %></p>
         <p><strong>Beneficiary: </strong><%= contract.beneficiary.name %></p>
         <%if current_user && current_user == contract.owner%>
-        <%= link_to "Delete this contract", user_contracts_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete%>
+        <%= button_to "Delete this contract", user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}%>
         <%end%>
+        <hr/>
       </p>
     <% end %>
   <% end %>

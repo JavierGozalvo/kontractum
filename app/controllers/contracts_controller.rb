@@ -52,10 +52,11 @@ class ContractsController < ApplicationController
 
   # DELETE /contracts/1 or /contracts/1.json
   def destroy
-    binding.pry
-    @user = User.find(current_user.id)
-    @contract = @user.contracts.find(contract.id)
-    @contract.destroy
+    if current_user == @contract.owner
+      @contract.destroy
+    else
+      render :edit
+    end
 
     respond_to do |format|
       format.html { redirect_to user_contracts_url, notice: "Contract was successfully destroyed." }
