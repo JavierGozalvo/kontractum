@@ -12,6 +12,7 @@
 
 	<p>Your current role is: <%= current_user.role%></p>
 	<p>You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created</p>
+	<p>You've been active since <%= current_user.created_at.strftime("%d of %B, %Y")%></p>
 	 <hr/>
 	<p><%= link_to "Edit PROFILE", edit_profile_path%>
 	<%= link_to "Edit PASSWORD", edit_user_registration_path%></p>

@@ -1,0 +1,50 @@
+<%= form_with model: (contract), url: user_contract_path(current_user, contract.id), data: { turbo: false } do |f| %>
+  <%if contract.errors.any? %>
+		<div>
+			<% contract.errors.full_messages.each do |message|%>
+				<div><%= message %></div>
+			<%end%>
+		</div>
+	<%end%>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+  </div>
+
+	<div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc, autofocus: true, autocomplete: "desc" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :kind %><br />
+    <%= f.text_field :kind, autofocus: true, autocomplete: "city" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.select :status, [:expired, :drafted, :approved, :proposed, :modification_requested, :payment_in_progress, :paid] %>
+  </div>
+
+  <br />
+
+  <div class="field">
+    <%= f.label :beneficiary %><br />
+    <%=  contract.beneficiary.name %>
+  </div>
+
+  <br/>
+
+  <div class="field">
+    <%= f.label :payable %><br />
+    <%= f.select :payable, [true, false]%>
+  </div>
+
+<br/>
+
+  <div class="actions">
+    <%= f.submit "Update Changes" %>
+  </div>
+<% end %>
+
