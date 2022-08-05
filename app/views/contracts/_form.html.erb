@@ -1,4 +1,4 @@
-<%= form_with model: contract, url: user_contracts_path, data: { turbo: false } do |f| %>
+<%= form_with model: (contract), url: user_contract_path(current_user, contract.id), data: { turbo: false } do |f| %>
   <%if contract.errors.any? %>
 		<div>
 			<% contract.errors.full_messages.each do |message|%>
