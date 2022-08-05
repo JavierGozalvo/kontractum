@@ -21,7 +21,6 @@
         <p><strong>Beneficiary: </strong><%= contract.beneficiary.name %></p>
         <%if current_user && current_user == contract.owner%>
         <%= button_to "Delete this contract", user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}%>
-        <%= link_to "Update this contract", edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}%>
         <%end%>
         <hr/>
       </p>

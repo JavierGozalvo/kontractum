@@ -39,15 +39,13 @@ class ContractsController < ApplicationController
 
   # PATCH/PUT /contracts/1 or /contracts/1.json
   def update
-    if current_user == @contract.owner
-      respond_to do |format|
-        if @contract.update(contract_params)
-          format.html { redirect_to user_contracts_url(@contract), notice: "Contract was successfully updated." }
-          format.json { render :show, status: :ok, location: @contract }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @contract.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @contract.update(contract_params)
+        format.html { redirect_to user_contracts_url(@contract), notice: "Contract was successfully updated." }
+        format.json { render :show, status: :ok, location: @contract }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @contract.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,14 +65,13 @@ class ContractsController < ApplicationController
   end
 
   private
-    
+    # Use callbacks to share common setup or constraints between actions.
     def set_contract
       @contract = Contract.find(params[:id])
     end
 
-    
+    # Only allow a list of trusted parameters through.
     def contract_params
       params.require(:contract).permit(:title, :desc, :kind, :status, :payable, :sender, :beneficiary)
     end
-
 end
