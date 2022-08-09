@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :contract do
-		user {create(:user)}
+		owner {create(:user)}
+    beneficiary {create(:user)}
     title {"Contracto Coche"}
     desc {"Contrato alquiler de coche"}
     kind {"Coches"}
-    status {0}
+    status {:drafted}
   end
 end

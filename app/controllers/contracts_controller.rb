@@ -22,13 +22,14 @@ class ContractsController < ApplicationController
   # POST /contracts or /contracts.json
   def create
     @contract = Contract.new(contract_params.except(:beneficiary))
+
     @contract.beneficiary = User.find(contract_params[:beneficiary].to_i)
     
     @contract.owner = current_user
 
     respond_to do |format|
       if @contract.save
-        format.html { redirect_to user_contracts_url(@contract), notice: "Contract was successfully created." }
+        format.html { redirect_to user_contracts_url(current_user), notice: "Contract was successfully created." }
         format.json { render :show, status: :created, location: @contract }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,8 +41,9 @@ class ContractsController < ApplicationController
   # PATCH/PUT /contracts/1 or /contracts/1.json
   def update
     respond_to do |format|
-      if @contract.update(contract_params)
-        format.html { redirect_to user_contracts_url(@contract), notice: "Contract was successfully updated." }
+      #binding.pry
+      if @contract.update(update_params)
+        format.html { redirect_to user_contracts_url(current_user), notice: "Contract was successfully updated." }
         format.json { render :show, status: :ok, location: @contract }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,11 +54,10 @@ class ContractsController < ApplicationController
 
   # DELETE /contracts/1 or /contracts/1.json
   def destroy
-    binding.pry
-    @user = User.find(current_user.id)
-    @contract = @user.contracts.find(contract.id)
-    @contract.destroy
-
+    if current_user == @contract.owner
+      @contract.destroy
+    end
+    
     respond_to do |format|
       format.html { redirect_to user_contracts_url, notice: "Contract was successfully destroyed." }
       format.json { head :no_content }
@@ -72,5 +73,9 @@ class ContractsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def contract_params
       params.require(:contract).permit(:title, :desc, :kind, :status, :payable, :sender, :beneficiary)
+    end
+
+    def update_params
+      contract_params.except(:beneficiary)
     end
 end
