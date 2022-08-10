@@ -14,17 +14,17 @@ i = 10000000
 							address: Faker::Address.street_address,
 							city: Faker::Address.city,
 							postalcode: Faker::Number.leading_zero_number(digits: 5),
-							password: "xxxxxx",
-							role: :customer,
+              password: "xxxxxx",
+							role: :customer
 							)
 	end
 
-	30.times do |n|
-		Contract.create(title: Faker::Hacker.abbreviation,
-										desc: Faker::Hacker.say_something_smart,
-										kind: Faker::Hacker.adjective,
-										status: Faker::Number.between(from: 0, to: 6),
-										owner: User.find(rand(39..48)),
-										beneficiary: User.find(rand(39..48)),
-										payable: Faker::Boolean.boolean)
-	end
+30.times do |n|
+  Contract.create(title: Faker::Hacker.abbreviation,
+                  desc: Faker::Hacker.say_something_smart,
+                  kind: Faker::Hacker.adjective,
+                  status: Faker::Number.between(from: 0, to: 6),
+                  owner: User.find(rand(1..10)),
+                  beneficiary: User.find(rand(1..10)),
+                  payable: Faker::Boolean.boolean)
+end
