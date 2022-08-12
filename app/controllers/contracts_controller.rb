@@ -3,7 +3,18 @@ class ContractsController < ApplicationController
 
   # GET /contracts or /contracts.json
   def index
+    
     @contracts = Contract.all
+    
+    @contracts = @contracts.by_name(params[:name]) if params[:name].present?
+    
+    @contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
+    
+    @contracts = @contracts.by_owner(params[:owner]) if params[:owner].present?
+    
+    @contracts = @contracts.by_beneficiary(params[:beneficiary]) if params[:beneficiary].present?
+    
+
   end
 
   # GET /contracts/1 or /contracts/1.json
@@ -41,7 +52,6 @@ class ContractsController < ApplicationController
   # PATCH/PUT /contracts/1 or /contracts/1.json
   def update
     respond_to do |format|
-      #binding.pry
       if @contract.update(update_params)
         format.html { redirect_to user_contracts_url(current_user), notice: "Contract was successfully updated." }
         format.json { render :show, status: :ok, location: @contract }
