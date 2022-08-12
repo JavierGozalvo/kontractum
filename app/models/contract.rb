@@ -2,9 +2,6 @@ class Contract < ApplicationRecord
     belongs_to :owner, class_name: "User", foreign_key: "owner", required: true
     belongs_to :beneficiary, class_name: "User", foreign_key: "beneficiary", required: true
     
-    #scope :filtered_by_owner, -> {where(owner: current_user)}
-    #scope :filtered_by_beneficiary, -> {where(beneficiary: current_user)}
-    #scope :filter_ownership, -> {order(where())}
     scope :by_name, -> (title){where(title: title)}
     scope :by_payable, -> (payable){where(payable: payable)}
     scope :by_owner, -> (owner_id){where(owner: owner_id)}

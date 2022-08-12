@@ -7,7 +7,6 @@ class User < ApplicationRecord
     has_many :contracts, inverse_of: 'owner'
     has_many :contracts, inverse_of: 'beneficiary'
 
-
     validates :name, presence: true
     validates :surname, presence: true
     validates :doc_id, presence: true, format: {with: /[\d]{8}[A-Z]{1}/ , message: "is invalid, please enter your id in the correct format"}

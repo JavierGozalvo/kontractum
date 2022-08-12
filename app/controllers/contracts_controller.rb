@@ -5,16 +5,11 @@ class ContractsController < ApplicationController
   def index
     
     @contracts = Contract.all
-    
     @contracts = @contracts.by_name(params[:name]) if params[:name].present?
-    
     @contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
-    
     @contracts = @contracts.by_owner(params[:owner]) if params[:owner].present?
-    
     @contracts = @contracts.by_beneficiary(params[:beneficiary]) if params[:beneficiary].present?
     
-
   end
 
   # GET /contracts/1 or /contracts/1.json
