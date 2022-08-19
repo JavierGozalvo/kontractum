@@ -1,0 +1,13 @@
+<h3>Advanced search</h3>
+  <%= form_with(url: user_contracts_path(current_user), method: "get", local: true, data: {turbo: "false"}) do |f|%>
+    <p>Search title: <%= text_field_tag :title, params[:title] %></p>
+		<p>Payable?</p>
+		<p>	Yes: 	<%= radio_button_tag :payable, true, params[:payable] == "true"%>
+				No: 	<%= radio_button_tag :payable, false, params[:payable] == "false"%></p>
+    <p>Search by:</p>
+		<p>	Owner: 	<%= radio_button_tag :user_kind, true, params[:user_kind] == "true"%>
+				Beneficiary: 	<%= radio_button_tag :user_kind, false, params[:user_kind] == "false" %></p>
+    <p><%= submit_tag("Search") %>
+    <%= link_to "Clear all", user_contracts_path(current_user) %></p>
+    <%= link_to "Back to dashboard", root_path%>
+	<% end %>

@@ -4,20 +4,18 @@
   <%if current_user.admin?%>
     <p>Admin View -- Contract List</p>
   <%end%>
+
   <%if Contract.select {|contract| contract.owner == current_user}.count == 0 %>
     <p>You dont have any contract created right now.</p>
     <p><%= link_to "Create contract", new_user_contract_path(current_user)%>
   <%end%>
-  <h3>Advanced search</h3>
-  <%= form_with(url: user_contracts_path(current_user), method: "get", local: true, data: {turbo: "false"}) do |f|%>
-    <p>Search title: <%= text_field_tag :name, params[:name] %></p>
-    <p>Search payable?: <%= text_field_tag :payable, params[:payable] %></p>
-    <p>Search owner: <%= f.select :owner, User.all.collect{|u| [u.name, u.id]}, include_blank: true  %></p>
-    <p>Search beneficiary: <%= f.select :beneficiary, User.all.collect{|u| [u.name, u.id]}, include_blank: true %></p>
-    <p><%= submit_tag("Search") %>
-    <%= link_to "Clear all", user_contracts_path(current_user) %></p>
-    <%= link_to "Back to dashboard", root_path%>
-  <% end %>
+
+  <%if current_user.admin?%>
+    <%= render "adminform" %>
+  <%else%>
+    <%=render "customerform"%>
+  <%end%>
+  
   <hr/>
   <% @contracts.each do |contract| %>
     <%if (current_user && current_user == contract.beneficiary) || (current_user && current_user == contract.owner) || current_user.admin?%>   
