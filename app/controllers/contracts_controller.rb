@@ -5,10 +5,10 @@ class ContractsController < ApplicationController
   def index
     
     @contracts = Contract.all
-    @contracts = @contracts.by_name(params[:name]) if params[:name].present?
+    @contracts = @contracts.by_title(params[:title]) if params[:title].present?
     @contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
-    @contracts = @contracts.by_owner(params[:owner]) if params[:owner].present?
-    @contracts = @contracts.by_beneficiary(params[:beneficiary]) if params[:beneficiary].present?
+    @contracts = @contracts.by_owner(current_user.id) if params[:user_kind].present? && params[:user_kind] == "true"
+    @contracts = @contracts.by_beneficiary(current_user.id) if params[:user_kind].present? && params[:user_kind] == "false"
     
   end
 
