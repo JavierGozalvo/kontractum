@@ -13,3 +13,106 @@
  *= require_tree .
  *= require_self
  */
+
+/* CSS for INDEX/home */
+.divinfo:hover {
+  transform: scale(1.02);
+}
+
+.divinfo {
+  transition: transform 0.2s ease;
+  margin: auto;
+  width: 40%;
+  border-radius: 10px;
+  border: 0px solid;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* CSS for INDEX/contracts */
+.contract:hover {
+  transform: scale(1.02);
+}
+
+.contract {
+  transition: transform 0.2s ease;
+  position: relative;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.EditPasswordBox {
+  margin: auto;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.DeleteAccBox {
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.EditProfileBox {
+  margin: auto;
+  width: 50%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.NewContractBox {
+  margin: auto;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.EditContractBox {
+  margin: auto;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.CustomerForm {
+  margin: auto;
+  position: sticky;
+  top: 80px;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: white !important;
+  overflow: auto;
+}
+
+.AdminForm {
+  margin: auto;
+  position: sticky;
+  top: 80px;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background: #fff;
+  overflow: auto;
+}
+
+.NewRegistrationBox {
+  margin: auto;
+  width: 60%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
