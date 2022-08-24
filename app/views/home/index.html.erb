@@ -1,24 +1,49 @@
-<h1>Pagina principal de Kontractum</h1>
-
-<h2>Bienvenid@ de nuevo, <%= current_user.name%></h2>
-<hr/>
-<h3>Dashboard - <%= current_user.email%></h3>
-<% if user_signed_in? %>
-
-	<%if current_user.admin?%>
-		<p>There are currently <%= User.count%> active accounts</p>
-		<p>There are currently <%= Contract.count%> total contracts created</p>
-	<%end%>
-
-	<p>Your current role is: <%= current_user.role%></p>
-	<p>You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created</p>
-	<p>You have been sent <%= Contract.select {|contract| contract.beneficiary == current_user}.count%> contracts!</p>
-	<p>You've been active since <%= current_user.created_at.strftime("%d of %B, %Y")%></p>
-	 <hr/>
-	<p><%= link_to "Edit PROFILE", edit_profile_path%>
-	<%= link_to "Edit PASSWORD", edit_user_registration_path%></p>
-
-	<p><%= link_to "New contract", new_user_contract_path(current_user)%>
-	<%= link_to "See created contracts", user_contracts_url(current_user)%></p>
-	<%= link_to "LOG OUT", destroy_user_session_path%>
-<%end%>
+<div style="min-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)">
+		<div class="text-center">
+		<br>
+		<h2>Bienvenid@ de nuevo, <%= current_user.name%></h2>
+		</div>
+		<hr/>
+		<div class="text-center mb-3">
+		<h3>Dashboard - <%= current_user.email%></h3>
+		</div>
+		<div class="col-md-12 order-md-1">
+		<% if user_signed_in? %>
+			<%if current_user.admin?%>
+			<div class="row justify-content-between">
+				<div style="background-color: #B9314F" class="mb-3 text-center divinfo">
+					<span style="color:white">There are currently <%= User.count%> active accounts  <i class="bi bi-people-fill fa-lg"></i></span>
+				</div>
+				<div style="background-color: #01295F" class="mb-3 text-center divinfo">
+					<span style="color:white">There are currently <%= Contract.count%> total contracts created  <i class="bi bi-file-earmark-check fa-lg"></i></span>
+				</div>
+			</div>
+			<%end%>
+		
+			<div class="row justify-content-between">
+				<div style="background-color: #009DDC" class="mb-3 text-center divinfo">
+					<span style="color:white">Your current role is: <%= current_user.role%>  <i class="bi bi-person-square fa-lg"></i></span>
+				</div>
+				<div style="background-color: #F26430" class="mb-3 text-center divinfo">
+					<span style="color:white">You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created  <i class="bi bi-file-earmark-plus fa-lg"></i></span>
+				</div>
+			</div>
+			<div class="row justify-content-between">
+				<div style="background-color: #6761A8" class="mb-3 text-center divinfo">
+					<span style="color:white">You have been sent <%= Contract.select {|contract| contract.beneficiary == current_user}.count%> contracts  <i class="bi bi-file-earmark-arrow-down fa-lg"></i></span>
+				</div>
+				<div style="background-color: #009B72" class="mb-3 text-center divinfo">
+					<span style="color:white">You've been active since <%= current_user.created_at.strftime("%d of %B, %Y")%>  <i class="bi bi-calendar-event fa-lg"></i></span>
+				</div>
+			</div>
+		<hr/>
+	<div class="row justify-content-center">
+			<span class="m-3"><%= link_to "New contract", new_user_contract_path(current_user), :class => "btn btn-outline-primary"%></span>
+			<span class="m-3"><%= link_to "See created contracts", user_contracts_url(current_user), :class => "btn btn-secondary"%></span>
+	</div>
+		<%end%>
+</div>

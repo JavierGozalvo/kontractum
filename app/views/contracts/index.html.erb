@@ -1,9 +1,8 @@
-<h1>Contracts</h1>
-
+<br>
+<div class="text-center">
+<h1>Contract list for <%= current_user.name%></h1>
+</div>
 <div id="contracts">
-  <%if current_user.admin?%>
-    <p>Admin View -- Contract List</p>
-  <%end%>
 
   <%if Contract.select {|contract| contract.owner == current_user}.count == 0 %>
     <p>You dont have any contract created right now.</p>
@@ -15,27 +14,29 @@
   <%else%>
     <%=render "customerform"%>
   <%end%>
-  
-  <hr/>
-  <% @contracts.each do |contract| %>
-    <%if (current_user && current_user == contract.beneficiary) || (current_user && current_user == contract.owner) || current_user.admin?%>   
-      <p>
-        <h2>Contract <%=contract.id%></h2>
-        <p><strong>Title: </strong><%= contract.title %></p>
-        <p><strong>Description: </strong><%= contract.desc %></p>
-        <p><strong>Kind: </strong><%= contract.kind %></p>
-        <p><strong>Status: </strong><%= contract.status %></p>
-        <p><strong>Payable? </strong><%= contract.payable ? "Yes" : "No"%></p>
-        <p><strong>Owner: </strong><%= contract.owner.name %></p>
-        <p><strong>Beneficiary: </strong><%= contract.beneficiary.name %></p>
-        <%if current_user && current_user == contract.owner%>
-        <%= button_to "Delete this contract", user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}%>
-        <%= link_to "Update this contract", edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}%>
-        <%end%>
-        <hr/>
-      </p>
-    <% end %>
-  <% end %>
-</div>
 
-<%= link_to "Back to dashboard", root_path%>
+  <div class="row justify-content-around">
+      <% @contracts.each do |contract| %>
+        <%if (current_user && current_user == contract.beneficiary) || (current_user && current_user == contract.owner) || current_user.admin?%>
+            <div class="mb-3 contract">
+              
+                    <h2 class="text-center">Contract <%=contract.id%></h2>
+                    <p><strong>Title: </strong><%= contract.title %></p>
+                    <p><strong>Description: </strong><%= contract.desc %></p>
+                    <p><strong>Kind: </strong><%= contract.kind %></p>
+                    <p><strong>Status: </strong><%= contract.status %></p>
+                    <p><strong>Payable? </strong><%= contract.payable ? "Yes" : "No"%></p>
+                    <p><strong>Owner: </strong><%= contract.owner.name %></p>
+                    <p><strong>Beneficiary: </strong><%= contract.beneficiary.name %></p>
+                    <%if current_user && current_user == contract.owner%>
+                    <div class="row justify-content-around">
+                        <%= button_to "Delete", user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}, class: "btn btn-danger"%>
+                        <%= link_to "Update", edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-dark"%>
+                    </div>
+                    <%end%>
+            
+            </div>
+          <% end %>   
+        <% end %>
+  
+  </div>

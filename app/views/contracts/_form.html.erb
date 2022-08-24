@@ -1,3 +1,11 @@
+<div style="min-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)">
+<div class="text-center">
+<h1>New Contract</h1>
+</div>
 <%= form_with model: contract, url: user_contracts_path, data: { turbo: false } do |f| %>
   <%if contract.errors.any? %>
 		<div>
@@ -6,43 +14,55 @@
 			<%end%>
 		</div>
 	<%end%>
+<div class="NewContractBox">
+  <div class="col-md-12 order-md-1">
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+    <div class="row justify-content-between">
+      <div class="mb-3">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "e.j. 'House Contract'" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :kind %><br />
+        <%= f.text_field :kind, autofocus: true, autocomplete: "city" , placeholder: "e.j. 'Real Estate'"%>  
+      </div>
+    </div>
+
+    <div class="row justify-content-start">
+      <div class="mb-3">
+        <%= f.label :desc %><br />
+        <%= f.text_area :desc, autofocus: true, autocomplete: "desc", placeholder: "e.j. 'Payment to Jake in order to buy his house'", :style=>"width: 200%" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-between">
+      <div class="mb-3">
+        <%= f.label :status %><br />
+        <%= f.select :status, [:expired, :drafted, :approved, :proposed, :modification_requested, :payment_in_progress, :paid] %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :beneficiary %><br />
+        <%= f.select :beneficiary, User.all.collect{|u| [u.name, u.id]}%>
+      </div>
+      <div class="mb-3">
+        <%= f.label :payable %><br />
+        <%= f.select :payable, [true, false]%>
+      </div>
+    </div>
+
+    <br/>
+    <div class="row justify-content-around">
+      <div class="mb-3">
+        <div class="actions">
+          <%= f.submit "Save" , :class => "btn btn-success"%>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= link_to "Back", root_path, :class => "btn btn-secondary" %>
+      </div>
+    </div>
   </div>
-
-	<div class="field">
-    <%= f.label :desc %><br />
-    <%= f.text_field :desc, autofocus: true, autocomplete: "desc", size: "60x10" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :kind %><br />
-    <%= f.text_field :kind, autofocus: true, autocomplete: "city" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.select :status, [:expired, :drafted, :approved, :proposed, :modification_requested, :payment_in_progress, :paid] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :beneficiary %><br />
-    <%= f.select :beneficiary, User.all.collect{|u| [u.name, u.id]}%>
-  </div>
-
-  <br/>
-
-  <div class="field">
-    <%= f.label :payable %><br />
-    <%= f.select :payable, [true, false]%>
-  </div>
-
-<br/>
-
-  <div class="actions">
-    <%= f.submit "Update Changes" %>
-  </div>
+</div>
 <% end %>
-
+</div>
