@@ -6,7 +6,7 @@
 <div class="text-center">
 <h1>New Contract</h1>
 </div>
-<%= form_with model: contract, url: user_contracts_path, data: { turbo: false } do |f| %>
+<%= form_with model: contract, url: user_contracts_path, data: { turbo: false }, html: {id: "contractForm"} do |f| %>
   <%if contract.errors.any? %>
 		<div>
 			<% contract.errors.full_messages.each do |message|%>
@@ -20,7 +20,7 @@
     <div class="row justify-content-between">
       <div class="mb-3">
         <%= f.label :title %><br />
-        <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "e.j. 'House Contract'" %>
+        <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "e.j. 'House Contract'", id: "title" %>
       </div>
 
       <div class="mb-3">
@@ -32,7 +32,7 @@
     <div class="row justify-content-start">
       <div class="mb-3">
         <%= f.label :desc %><br />
-        <%= f.text_area :desc, autofocus: true, autocomplete: "desc", placeholder: "e.j. 'Payment to Jake in order to buy his house'", :style=>"width: 200%" %>
+        <%= f.text_area :desc, autofocus: true, autocomplete: "desc", placeholder: "e.j. 'Payment to Jake in order to buy his house'", :style=>"width: 200%", id: "desc" %>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
     <div class="row justify-content-around">
       <div class="mb-3">
         <div class="actions">
-          <%= f.submit "Save" , :class => "btn btn-success"%>
+          <%= f.submit "Save" , :class => "btn btn-success", id: "submit" %>
         </div>
       </div>
       <div class="mb-3">
