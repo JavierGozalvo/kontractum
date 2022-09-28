@@ -44,6 +44,10 @@
 	<div class="row justify-content-center">
 			<span class="m-3"><%= link_to "New contract", new_user_contract_path(current_user), :class => "btn btn-outline-primary"%></span>
 			<span class="m-3"><%= link_to "See created contracts", user_contracts_url(current_user), :class => "btn btn-secondary"%></span>
+			<span class="m-3"><button class="enableEthereumButton btn btn-warning">Enable Ethereum</button></span>
+	</div>
+	<div class="row justify-content-center">
+		<p><span class="showAccount text-success"></span></p>
 	</div>
 		<%end%>
 </div>
