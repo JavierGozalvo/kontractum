@@ -1,0 +1,91 @@
+<div class="container-xl px-4 mt-5">
+
+ <div class="row ml-5">
+      <div class="col-md-3">
+            <!-- Profile picture card-->
+            <div class="card mb-4 ml-4 mb-xl-5">
+                <div class="card-header h4">Owner information</div>
+                <div class="card-body">
+                    <!-- Profile picture help block-->
+                    <div class="font-italic text-muted mb-4">Contract owner: <%= @contract.owner.name%></div>
+                    <div class="font-italic text-muted mb-4">User active since: <%= @contract.owner.created_at.strftime('%d/%m/%Y')%></div>
+                    <%if current_user && current_user == contract.owner%>
+                      <div class="font-italic text-muted mb-4">Total contracts created: <%= Contract.select{|contract| contract.owner == current_user}.count%></div>
+                    <%elsif current_user && current_user == contract.beneficiary%>
+                      <div class="font-italic text-muted mb-4">Total contracts created: <%= Contract.select{|contract| contract.owner == @contract.owner}.count%></div>
+                    <%end%>
+                    <%if current_user && current_user == contract.owner%>
+                        <%= link_to "Edit Profile", edit_profile_path, :class => "btn btn-primary buttonText", style: "width: 100%; height: 65px"%>
+                    <%end%>
+                </div>
+            </div>
+      </div>
+
+      <div class="col-xl-8">
+          <!-- Account details card-->
+          <div class="card mb-4">
+              <div class="card-header h4">Contract Details</div>
+              <div class="card-body">
+                  <form>
+                      <div class="row mb-3">
+                          <!-- Form Group (first name)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="title">Title</label>
+                              <span class="form-control" id="title" style="height:45px;" readonly><%= @contract.title%></span>
+                          </div>
+                          <!-- Form Group (last name)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="status">Status</label>
+                              <span class="form-control" id="status" style="height:45px;" readonly><%= @contract.status%></span>
+                          </div>
+                      </div>
+                      <!-- Form Group (username)-->
+                      <div class="mb-3">
+                          <label class=" mb-1" for="description">Description</label>
+                          <span class="form-control" id="description" style="height:90px;" readonly><%= @contract.desc%></span>
+                      </div>
+                      <!-- Form Row-->
+                      <!-- Form Row        -->
+                      <div class="row gx-3 mb-3">
+                          <!-- Form Group (organization name)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="kind">Kind</label>
+                              <span class="form-control" id="kind" style="height:45px;" readonly><%= @contract.kind%></span>
+                          </div>
+                          <!-- Form Group (location)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="payable">Payable?</label>
+                              <span class="form-control" id="payable" style="height:45px;" readonly><%= @contract.payable%></span>
+                          </div>
+                      </div>
+        
+                      <!-- Form Row-->
+                      <div class="row gx-3 mb-3">
+                          <!-- Form Group (phone number)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="beneficiary">Beneficiary</label>
+                              <span class="form-control" id="beneficiary" style="height:45px;" readonly><%= @contract.beneficiary.name%></span>
+                          </div>
+                          <!-- Form Group (birthday)-->
+                          <div class="col-md-6">
+                              <label class=" mb-1" for="creation">Created At</label>
+                              <span class="form-control" id="creation" style="height:45px;" readonly><%= @contract.created_at.strftime("%d/%m/%Y")%></span>
+                          </div>
+                      </div>
+                      <!-- Save changes button-->
+                        <div class="row justify-content-around buttonBoxSoloInfo">
+                          <div class="actions">
+                            <%= link_to raw("<i class=\"fa fa-home\"></i> Go Home"), root_path, :class => "btn btn-secondary buttonText", style:"width:120px;height:60px;margin: 15px" %>
+                          </div>
+                           <%if current_user && current_user == contract.owner%>
+                          <div>
+                            <%= link_to raw("<i class=\"fa fa-edit\"></i> Edit"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success buttonText", style: "width:150px;height:60px;margin:15px;"%>
+                          </div>
+                          <%end%>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
