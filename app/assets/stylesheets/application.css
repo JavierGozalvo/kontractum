@@ -15,7 +15,7 @@
  */
 
 /* CSS for INDEX/home */
-.divinfo:hover {
+/*.divinfo:hover {
   transform: scale(1.02);
 }
 
@@ -29,8 +29,10 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
+*/
 
 /* CSS for INDEX/contracts */
+/*
 .contract:hover {
   transform: scale(1.02);
 }
@@ -85,7 +87,7 @@
 
 .CustomerForm {
   margin: auto;
-  position: sticky;
+  position: inherit;
   top: 80px;
   width: 80%;
   border: 1px solid;
@@ -98,7 +100,7 @@
 
 .AdminForm {
   margin: auto;
-  position: sticky;
+  position: inherit;
   top: 80px;
   width: 80%;
   border: 1px solid;
@@ -115,4 +117,585 @@
   border: 0px solid;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}*/
+/* CSS used here will be applied after bootstrap.css */
+
+body {
+  margin-top: 0;
+  background: rgb(255, 255, 255);
+}
+
+.EditDeleteButtons {
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+}
+
+.mainContent {
+  justify-content: center !important;
+}
+
+.mainFilter {
+  justify-content: center !important;
+  margin-top: 30px;
+}
+
+.FilterList {
+  max-width: 70%;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.mainColumn {
+  max-width: 24%;
+  padding-right: 3px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 0px;
+}
+
+.gridTable {
+  margin-bottom: 20px;
+}
+
+.buttonText {
+  display: inline-block;
+  line-height: 50px;
+  text-align: center;
+}
+
+.primaryButton {
+  margin-top: 10px;
+}
+
+.contract {
+  transition: 0.3s ease-in-out;
+  line-height: 40px;
+}
+
+.description {
+  font-size: 16px;
+}
+
+td > * {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.contract:hover {
+  background-color: #d2d2d2;
+}
+
+.divinfo {
+  margin: auto;
+  width: 250px;
+  border-radius: 10px;
+  border: 0px solid;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.rowinfo {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+}
+
+.firstDivInfo {
+  margin: auto;
+  width: 850px;
+  border-radius: 10px;
+  border: 0px solid;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.folderButton {
+  width: 70%;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.time {
+  font-size: small;
+}
+
+.textField {
+  height: 50px;
+}
+
+.email .btn.search {
+  font-size: 0.9em;
+}
+
+.email h2 {
+  margin-top: 0;
+  padding-bottom: 8px;
+}
+
+.email .nav.nav-pills > li > a {
+  border-top: none !important;
+}
+
+.email .nav.nav-pills > li > a > .fa {
+  margin-right: 5px;
+}
+
+.email .nav.nav-pills > li.active > a,
+.email .nav.nav-pills > li.active > a:hover {
+  background-color: #f6f6f6;
+  border-top-color: #3c8dbc;
+}
+
+.email .nav.nav-pills > li.active > a {
+  font-weight: 600;
+}
+
+.email .nav.nav-pills > li > a:hover {
+  background-color: #f6f6f6;
+}
+
+.email .nav.nav-pills.nav-stacked > li > a {
+  color: rgb(255, 255, 255);
+  border-top: 0;
+  border-left: 3px solid transparent;
+  border-radius: 0px;
+}
+
+.email .nav.nav-pills.nav-stacked > li.active > a,
+.email .nav.nav-pills.nav-stacked > li.active > a:hover {
+  background-color: #f6f6f6;
+  border-left-color: #3c8dbc;
+  color: #444;
+}
+
+.email .nav.nav-pills.nav-stacked > li.header {
+  color: #777;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0px 0 10px 0;
+}
+
+.email table {
+  font-weight: 600;
+}
+
+.email table a {
+  color: #666;
+}
+
+td {
+  border-top: none;
+  border-bottom: none;
+}
+
+.email table tr.read > td {
+  font-weight: 400;
+}
+
+.email table tr td > i.fa {
+  font-size: 1.2em;
+  line-height: 0;
+  text-align: center;
+}
+
+.email table tr > td.action {
+  padding-left: 0px;
+  padding-right: 2px;
+}
+
+.grid {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  color: #5d5d5d;
+  border-radius: 2px;
+  margin-bottom: 25px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grid .grid-header:after {
+  clear: both;
+}
+
+.grid .grid-header span,
+.grid .grid-header > .fa {
+  display: inline-block;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.5em;
+  float: left;
+}
+
+.grid .grid-header span {
+  padding: 0 5px;
+}
+
+.grid .grid-header > .fa {
+  padding: 5px 10px 0 0;
+}
+
+.grid .grid-header > .grid-tools {
+  padding: 4px 10px;
+}
+
+.grid .grid-header > .grid-tools a {
+  color: #999999;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.grid .grid-header > .grid-tools a:hover {
+  color: #666666;
+}
+
+.grid .grid-body {
+  padding: 15px 20px 15px 20px;
+  font-size: 0.9em;
+  line-height: 1.9em;
+}
+
+.grid .full {
+  padding: 0 !important;
+}
+
+.grid .transparent {
+  box-shadow: none !important;
+  margin: 0px !important;
+  border-radius: 0px !important;
+}
+
+.grid.top.black > .grid-header {
+  border-top-color: #000000 !important;
+}
+
+.grid.bottom.black > .grid-body {
+  border-bottom-color: #000000 !important;
+}
+
+.grid.top.blue > .grid-header {
+  border-top-color: #007be9 !important;
+}
+
+.grid.bottom.blue > .grid-body {
+  border-bottom-color: #007be9 !important;
+}
+
+.grid.top.green > .grid-header {
+  border-top-color: #00c273 !important;
+}
+
+.grid.bottom.green > .grid-body {
+  border-bottom-color: #00c273 !important;
+}
+
+.grid.top.purple > .grid-header {
+  border-top-color: #a700d3 !important;
+}
+
+.grid.bottom.purple > .grid-body {
+  border-bottom-color: #a700d3 !important;
+}
+
+.grid.top.red > .grid-header {
+  border-top-color: #dc1200 !important;
+}
+
+.grid.bottom.red > .grid-body {
+  border-bottom-color: #dc1200 !important;
+}
+
+.grid.top.orange > .grid-header {
+  border-top-color: #f46100 !important;
+}
+
+.grid.bottom.orange > .grid-body {
+  border-bottom-color: #f46100 !important;
+}
+
+.grid.no-border > .grid-header {
+  border-bottom: 0px !important;
+}
+
+.grid.top > .grid-header {
+  border-top-width: 4px !important;
+  border-top-style: solid !important;
+}
+
+.grid.bottom > .grid-body {
+  border-bottom-width: 4px !important;
+  border-bottom-style: solid !important;
+}
+
+.folderBox {
+  max-width: 96%;
+  padding-right: 10px;
+  padding-top: 1px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.folderList {
+  left: 0;
+}
+
+.EditPasswordBox {
+  margin: auto;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.DeleteAccBox {
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.EditProfileBox {
+  margin: auto;
+  width: 50%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.NewContractBox {
+  margin: auto;
+  width: 50%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.EditContractBox {
+  margin: auto;
+  width: 40%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.ViewContractBox {
+  margin: auto;
+  width: 60%;
+  height: 400px;
+  border-left: 5px solid grey;
+  padding: 20px;
+}
+
+.contractBox {
+  height: 400px;
+}
+
+.buttonBox {
+  width: 100%;
+  margin-left: 1px;
+  border-radius: 3px;
+  background-color: #e7e7e7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.passwordButtonBox {
+  margin-left: 65px;
+  max-width: 70%;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.buttonBoxSoloInfo {
+  margin-left: 120px;
+  max-width: 70%;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.InfoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+  padding-top: 1px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  background-color: #d1d1d1;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.CustomerForm {
+  margin: auto;
+  position: inherit;
+  top: 80px;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: white !important;
+  overflow: auto;
+}
+
+.AdminForm {
+  margin: auto;
+  position: inherit;
+  top: 80px;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background: #fff;
+  overflow: auto;
+}
+
+.NewRegistrationBox {
+  margin: auto;
+  width: 60%;
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+body {
+  margin-top: 20px;
+  background-color: #f2f6fc;
+  color: #69707a;
+}
+.img-account-profile {
+  height: 10rem;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+.card {
+  box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+  font-weight: 500;
+}
+.card-header:first-child {
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+  padding: 1rem 1.35rem;
+  margin-bottom: 0;
+  background-color: rgba(33, 40, 50, 0.03);
+  border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control,
+.dataTable-input {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #69707a;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c5ccd6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.35rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.marginLeft {
+  margin-left: 350px;
+}
+
+.marginRight {
+  margin-right: 205px;
+}
+
+.pagination a,
+.pagination span.current,
+.pagination span.gap {
+  position: relative;
+  float: left;
+  padding: 0 14px;
+  line-height: 38px;
+  text-decoration: none;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.pagination {
+  display: flex;
+  position: static;
+  justify-content: center;
+  bottom: 0px;
+}
+.first {
+  padding: 0;
+  float: none;
+  border: none;
+}
+.prev {
+  padding: 0;
+  float: none;
+  border: none;
+}
+.page {
+  padding: 0;
+  float: none;
+  border: none;
+}
+.next {
+  padding: 0;
+  float: none;
+  border: none;
+}
+.last {
+  padding: 0;
+  float: none;
+  border: none;
+}
+
+.parent {
+}
+
+.child-one {
+}
+
+.child-two {
+}
+
+.child-three {
+  position: absolute;
 }

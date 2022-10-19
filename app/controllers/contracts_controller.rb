@@ -4,11 +4,15 @@ class ContractsController < ApplicationController
   # GET /contracts or /contracts.json
   def index
     
-    @contracts = Contract.all
-    @contracts = @contracts.by_title(params[:title]) if params[:title].present?
-    @contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
-    @contracts = @contracts.by_owner(current_user.id) if params[:user_kind].present? && params[:user_kind] == "true"
-    @contracts = @contracts.by_beneficiary(current_user.id) if params[:user_kind].present? && params[:user_kind] == "false"
+
+    @q = Contract.ransack(params[:q])
+    @contracts = @q.result(distinct: true)
+    #@contracts = Contract.all
+    #@contracts = @contracts.by_title(params[:title]) if params[:title].present?
+    #@contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
+    # @contracts = @contracts.by_beneficiary(current_user.id) if params[:user_kind].present? && params[:user_kind] == "false"
+    
+
     
   end
 
@@ -35,7 +39,7 @@ class ContractsController < ApplicationController
 
     respond_to do |format|
       if @contract.save
-        format.html { redirect_to user_contracts_url(current_user), notice: "Contract was successfully created." }
+        format.html { redirect_to root_path, notice: "Contract was successfully created." }
         format.json { render :show, status: :created, location: @contract }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,7 +52,7 @@ class ContractsController < ApplicationController
   def update
     respond_to do |format|
       if @contract.update(update_params)
-        format.html { redirect_to user_contracts_url(current_user), notice: "Contract was successfully updated." }
+        format.html { redirect_to root_path, notice: "Contract was successfully updated." }
         format.json { render :show, status: :ok, location: @contract }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,7 +68,7 @@ class ContractsController < ApplicationController
     end
     
     respond_to do |format|
-      format.html { redirect_to user_contracts_url, notice: "Contract was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Contract was successfully destroyed." }
       format.json { head :no_content }
     end
   end

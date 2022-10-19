@@ -1,53 +1,114 @@
-<div style="min-width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)">
-		<div class="text-center">
-		<br>
-		<h2>Bienvenid@ de nuevo, <%= current_user.name%></h2>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container-fluid mt-3">
+<div class="row">
+	<!-- BEGIN INBOX -->
+	<div class="col-md-12">
+		<div class="mainMenu">
+			<div class="grid-body">
+				<div class="row mainContent">
+					<!-- BEGIN INBOX MENU -->
+					<div class="col mainColumn">
+						<div class="btn-group primaryButton" role="group" style="width: 325px; height:70px;">
+							<%= link_to raw("<i class=\"fa fa-pencil\"></i> New Contract"), new_user_contract_path(current_user), :class => "btn btn-outline-primary btn btn-block mr-2 buttonText", style:"width:120px;"%>
+						</div>
+						
+
+						<div class="folderBox">
+							<ul style="list-style: none;" class="folderList">
+								<div class="mt-5">
+									<%= link_to raw("<i class=\"fa fa-inbox folder\"></i> Inbox"), root_path, :method => :get, class: "btn btn-primary buttonText", style:"width:230px; height:60px;"%>
+									<li class="mb-4">
+									</li>
+									<li class="mb-4"> 
+										<%= link_to raw("<i class=\"fa fa-mail-reply folder\"></i> Received"),q: {beneficiary: current_user.id}, class: "btn btn-primary"%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-mail-forward folder\"></i> Sent"), q: {owner: current_user.id}%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-exclamation-triangle folder\"></i> Expired"), q: {status: 0 }%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-folder folder\"></i> Drafted"), q: {status: 1 }%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-check folder\"></i> Approved"), q: {status: 2 }%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-question \"></i>  Proposed"), q: {status: 3 }%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-pencil-square-o\"></i> Modification Requested"), q: {status: 4 }%>
+									</li>
+									<li class="mb-4">
+										<%= link_to raw("<i class=\"fa fa-clock-o\"></i> Payment in progress"), q: {status: 5 }%>
+									</li>
+									<li class="">
+										<%= link_to raw("<i class=\"fa fa-eur\"></i> Paid"), q: {status: 6 }%>
+									</li>
+								</div>
+							</ul>
+						</div>
+					</div>
+					<!-- END INBOX MENU -->
+					
+					<!-- BEGIN INBOX CONTENT -->
+					<div class="col-md-9 FilterList">
+							<table class="table parent">
+								<div class="search-form child-one">
+									<form action="#">
+										<div class="input-group mainFilter">
+											<%= search_form_for @q, url: :user_contracts[current_user.id] do |f| %>
+												<div class="form-group">
+													<%= f.text_field :title_or_desc_cont, style: "height: 70px; width: 750px; margin-left: 5px;", placeholder: "Title, description...", class:"form-control" %>
+												</div>
+											<%end%>
+											<span class="input-group-btn">
+												<button class="btn btn-primary" style= "height: 70px; width: 120px; margin-left:5px"><i class="fa fa-search"></i></button>
+											
+												<%= link_to raw("<i class=\"fa fa-rotate-left\"></i>"), root_path, class: "btn btn-secondary buttonText", style: "height: 70px; width: 80px;"%>
+											</span>
+										</div>			 
+									</form>
+								</div>
+								<div class="child-two">
+									<tbody class="gridTable">
+										<% @contracts.each do |contract| %>
+										<tr class="contract">
+												<%if (current_user && current_user == contract.beneficiary) || (current_user && current_user == contract.owner) || current_user.admin?%>
+													<td class="title">
+															<div style="width:100px;"><%= link_to contract.title, user_contract_path(current_user, contract.id), data: {turbo: "false"}%></div>
+													</td>
+													<td class="description text-muted"><div style="text-overflow: ellipsis; overflow: hidden; width: 500px; height: 2.8em; white-space: nowrap;"><%= contract.desc%></div></td>
+													<%if Date.today.to_time.to_i - contract.created_at.to_time.to_i > 86400%>
+														<td class="time"><%= contract.created_at.strftime('%d/%m/%Y')%></td>
+													<%else%>
+														<td class="time"><%= contract.created_at.strftime('%H:%M')%></td>
+													<%end%>
+													<%if current_user && current_user == contract.owner%>
+														<td><%= link_to raw("<i class=\"fa fa-edit\"></i>"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
+														<td><%= button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
+													<%else%>
+														<td> </td>
+														<td> </td>
+													<%end%>
+												<%end%>
+											<%end%>
+											<br/>
+										</tr>
+									</tbody>
+								</div>
+								<div class="container pagination justify-content-center child-three" >
+									<%= will_paginate @contracts, remote: true %>
+								</div>
+							</table>
+						</div>
+					</div>
+					<!-- END INBOX CONTENT -->					
+				</div>
+			</div>
 		</div>
-		<hr/>
-		<div class="text-center mb-3">
-		<h3>Dashboard - <%= current_user.email%></h3>
-		</div>
-		<div class="col-md-12 order-md-1">
-		<% if user_signed_in? %>
-			<%if current_user.admin?%>
-			<div class="row justify-content-between">
-				<div style="background-color: #B9314F" class="mb-3 text-center divinfo">
-					<span style="color:white">There are currently <%= User.count%> active accounts  <i class="bi bi-people-fill fa-lg"></i></span>
-				</div>
-				<div style="background-color: #01295F" class="mb-3 text-center divinfo">
-					<span style="color:white">There are currently <%= Contract.count%> total contracts created  <i class="bi bi-file-earmark-check fa-lg"></i></span>
-				</div>
-			</div>
-			<%end%>
-		
-			<div class="row justify-content-between">
-				<div style="background-color: #009DDC" class="mb-3 text-center divinfo">
-					<span style="color:white">Your current role is: <%= current_user.role%>  <i class="bi bi-person-square fa-lg"></i></span>
-				</div>
-				<div style="background-color: #F26430" class="mb-3 text-center divinfo">
-					<span style="color:white">You have <%= Contract.select {|contract| contract.owner == current_user}.count%> contracts created  <i class="bi bi-file-earmark-plus fa-lg"></i></span>
-				</div>
-			</div>
-			<div class="row justify-content-between">
-				<div style="background-color: #6761A8" class="mb-3 text-center divinfo">
-					<span style="color:white">You have been sent <%= Contract.select {|contract| contract.beneficiary == current_user}.count%> contracts  <i class="bi bi-file-earmark-arrow-down fa-lg"></i></span>
-				</div>
-				<div style="background-color: #009B72" class="mb-3 text-center divinfo">
-					<span style="color:white">You've been active since <%= current_user.created_at.strftime("%d of %B, %Y")%>  <i class="bi bi-calendar-event fa-lg"></i></span>
-				</div>
-			</div>
-		<hr/>
-	<div class="row justify-content-center">
-			<span class="m-3"><%= link_to "New contract", new_user_contract_path(current_user), :class => "btn btn-outline-primary"%></span>
-			<span class="m-3"><%= link_to "See created contracts", user_contracts_url(current_user), :class => "btn btn-secondary"%></span>
-			<span class="m-3"><button class="enableEthereumButton btn btn-warning">Enable Ethereum</button></span>
 	</div>
-	<div class="row justify-content-center">
-		<p><span class="showAccount text-success"></span></p>
-	</div>
-		<%end%>
+	<!-- END INBOX -->
+</div>
 </div>

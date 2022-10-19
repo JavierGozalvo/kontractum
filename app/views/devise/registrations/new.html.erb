@@ -1,91 +1,118 @@
-  <div style="min-width: 80%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)">
-    <div class="text-center">
-      <h2>Sign up</h2>
-    </div>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="NewRegistrationBox">
-      <div class="col-md-12 order-md-1">  
-        <div class="row justify-content-between">    
-            <div class="mb-3">
-              <%= f.label :name %><br />
-              <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :surname %><br />
-              <%= f.text_field :surname, autofocus: true, autocomplete: "surname" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            </div>
+<!-- Section: Design Block -->
+<section>
+  <!-- Jumbotron -->
+  <div class="px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row gx-lg-4 align-items-center">
+        <div class="col-lg-6 mb-lg-0">
+          <h1 class="my-5 display-4 fw-bold ls-tight">
+            El registro sólo  <br />
+            <span class="text-primary">tomará 2 minutos.</span>
+          </h1>
+          <p style="color: hsl(217, 10%, 50.8%)">
+            Prepárate para descubrir el potencial de Kontractum.
+          </p>
         </div>
-        <div class="row justify-content-between"> 
-            <div class="mb-3">
-              <%= f.label :doc_id %><br />
-              <%= f.text_field :doc_id, autofocus: true, autocomplete: "doc_id" %>
-            </div>
 
-            <div class="mb-3">
-              <%= f.label :doc_kind %><br />
-              <%= f.select :doc_kind, [:dni, :driver_license, :passport] %>
-            </div>
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :name, autofocus: true, autocomplete: "Name", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example3">Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :surname, autofocus: true, autocomplete: "Surname", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example3">Surname</label>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="mb-3">
-              <%= f.label :birthdate %><br />
-              <%= f.text_field :birthdate, autofocus: true, autocomplete: "birthdate" %>
-            </div>
-        </div>
-        <div class="row justify-content-between"> 
-            <div class="mb-3">
-              <%= f.label :address %><br />
-              <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-            </div>
+                <!-- Email input -->
+                <div class="form-outline mb-2">
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style:"height:50px;"%>
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
 
-            <div class="mb-3">
-              <%= f.label :city %><br />
-              <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
-            </div>
+                <!-- Password input -->
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :birthdate, placeholder: "XX/XX/XX", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example4">Birthdate</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :address, autofocus: true, autocomplete: "Doc_kind", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example3">Address</label>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="mb-3">
-              <%= f.label :postalcode %><br />
-              <%= f.text_field :postalcode, autofocus: true, autocomplete: "postalcode" %>
-            </div>
-        </div>
-        <div class="row justify-content-around"> 
-            <div class="mb-3">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br />
-              <%= f.password_field :password, autocomplete: "new-password" %>
-            </div>
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :city, autocomplete: "city", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example4">City</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :postalcode, autofocus: true, autocomplete: "postalcode", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example3">Postalcode</label>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="mb-3">
-              <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-            </div>
-        </div>
-        <div class="row justify-content-around"> 
-            
-            <div class="actions">
-              <%= f.submit "Sign up", "data-turbo": false , :class => "btn btn-primary"%>
-            </div>
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.text_field :doc_id, autocomplete: "doc-id", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example4">Document ID</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.select :doc_kind, [[],["DNI", :dni], ["Driver's license", :driver_license], ["Passport", :passport]], {}, {class: "form-control", style:"height:50px;"}%>
+                      <label class="form-label" for="form3Example3">Type of Document</label>
+                    </div>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.password_field :password, placeholder:"Minimum 6 characters", class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example4">Password</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <%= f.password_field :password_confirmation, class: "form-control", style:"height:50px;"%>
+                      <label class="form-label" for="form3Example3">Repeat password</label>
+                    </div>
+                  </div>
+                </div>
 
-            <%= link_to "Back", root_path, :class => "btn btn-secondary"%>
-            
+                <!-- Submit button -->
+                <%= f.submit "Register", :class => "btn btn-primary btn-block mb-3"%>
+              <%end%>
+              Already have an account? <%= render "devise/shared/links" %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  <% end %>
-</div>
-
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
