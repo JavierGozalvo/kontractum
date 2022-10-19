@@ -20,7 +20,7 @@
   <body class="">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">Kontractum <i class="bi bi-file-earmark-code fa-lg"></i></a>
+    <a class="navbar-brand"  style="margin-left: 120px;" href="">Kontractum <i class="bi bi-file-earmark-code fa-lg"></i></a>
     <span style="color: #FFFFFF"><%= notice%></span>
     <span style="color: #FFFFFF"><%= alert%></span>
     <%if user_signed_in?%>
@@ -36,7 +36,7 @@
           <%= link_to "Edit Password", edit_user_registration_path, :class => "nav-link"%>
         </li>
         <li class="nav-item">
-          <%= link_to "LOG OUT", destroy_user_session_path, :class => "nav-link text-danger"%>
+          <%= link_to "LOG OUT", destroy_user_session_path, :class => "btn btn-danger nav-link font-weight-bold text-white", style: "margin-left:20px;"%>
         </li>
       </ul>
     </div>
