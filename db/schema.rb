@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_065416) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_072527) do
   create_table "contracts", force: :cascade do |t|
     t.string "title"
     t.text "desc"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_065416) do
     t.integer "owner"
     t.integer "beneficiary"
     t.boolean "payable", default: false, null: false
+    t.string "contract_file"
   end
 
   create_table "users", force: :cascade do |t|
