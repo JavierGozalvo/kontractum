@@ -18,6 +18,7 @@ gem "bootsnap", require: false
 gem "ransack"
 gem "will_paginate"
 gem "will_paginate-bootstrap4"
+gem 'carrierwave', '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
