@@ -1,4 +1,4 @@
-<div class="container-xl px-4 mt-5">
+<div class="container-xl px-1">
   <%= form_with model: contract, url: user_contracts_path, data: { turbo: false }, html: {id: "contractForm"} do |f| %>
     <%if contract.errors.any? %>
       <div>
@@ -9,60 +9,55 @@
     <%end%>
     <div class="row marginLeft">
         <div class="col-xl-8">
-            <!-- Account details card-->
-          <div class="card mb-4">
+            
+          <div class="card mb-3">
               <div class="card-header h4">Create Contract</div>
               <div class="card-body">
                   <form>
                       <div class="row mb-3">
-                          <!-- Form Group (first name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="title">Title</label>
                               <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;" %>
                           </div>
-                          <!-- Form Group (last name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="status">Status</label>
                               <%= f.select :status, [[],["Approved", :approved], ['Drafted', :drafted],["Expired", :expired],["Proposed", :proposed],["Modification requested", :modification_requested],["In payment progress", :payment_in_progress],["Paid", :paid]], {}, {class: "form-control", style:"height:50px;"}%>
                           </div>
                       </div>
-                      <!-- Form Group (username)-->
                       <div class="mb-3">
                           <label class=" mb-1" for="description">Description</label>
                           <%= f.text_area :desc, autofocus: true, autocomplete: "title", class: "form-control", style:"height:100px;" %>
                       </div>
-                      <!-- Form Row-->
-                      <!-- Form Row        -->
                       <div class="row gx-3 mb-3">
-                          <!-- Form Group (organization name)-->
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <label class=" mb-1" for="kind">Kind</label>
                               <%= f.text_field :kind, autofocus: true, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
                           </div>
-                          <!-- Form Group (location)-->
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <label class="mb-1" for="payable">Payable?</label>
                               <%= f.select :payable, [[],["Yes", true], ['No', false]], {}, {class: "form-control", style:"height:50px;"}%>
                           </div>
-                      </div>
-        
-                      <div class="row gx-3 mb-3">
-                          <!-- Form Group (phone number)-->
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <label class=" mb-1" for="beneficiary">Beneficiary</label>
                               <%= f.select :beneficiary, User.all.collect{|u| [u.name, u.id]}, {}, {class: "form-control", style:"height:50px;"}%>
                           </div>
-                          <!-- Form Group (birthday)-->
+                      </div>
+        
+                      <div class="row gx-3 mb-2">
+                          <div class="col-md-6">
+                              <label class=" mb-3" for="creation">Upload contract</label>
+                              <%= f.file_field :contract_file, class: "form-field", style:"height:50px;"%>
+                          </div>
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation">Created At</label>
                               <span class="form-control" id="creation"  style="height:50px;"readonly><%= Date.today%></span>
                           </div>
                       </div>
-                      <!-- Save changes button-->
+                      
                       <div class="row buttonBox justify-content-around">
                           <%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
                           <%= f.submit "Create contract", :class => "btn btn-success", style: "width:150px;height:60px;margin:15px;" %>
-            </div>
+                      </div>
           </form>
               </div>
           </div>
