@@ -30,6 +30,9 @@
           <%= link_to "Home", root_path, :class => "nav-link"%>
         </li>
         <li class="nav-item">
+          <%= link_to "Dashboard", user_path(current_user.id), :class => "nav-link"%>
+        </li>
+        <li class="nav-item">
           <%= link_to "Edit Profile", edit_profile_path, :class => "nav-link"%>
         </li>
         <li class="nav-item">

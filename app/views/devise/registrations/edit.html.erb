@@ -29,16 +29,18 @@
                               <%= f.password_field :current_password, autocomplete: "new-password", class: "form-control", style:"width: 100%;height:50px;" %>
                           </div>
                     </div>
-                    <div class="row mb-4 passwordButtonBox">
-                      <div class="col-xl-12">
+                    <div class="row mb-4 justify-content-around buttonBox">
+                      <div class="">
                         <%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
-                        <%= f.submit "Update", :class => "btn btn-success buttonText", style: "width:130px;height:60px;margin:5px;" %>
                       </div> 
+                      <div class="">
+                        <%= f.submit "Update", :class => "btn btn-success buttonText", style: "width:130px;height:60px;margin:15px;" %>
+                      </div>
                     </div>
                     <div class="row mb-3">
                           <div class="col-xl-12">
-                              <h3>Unhappy?</h3>
-                              <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn btn-danger", style:"width: 100%;height:50px;" %></p>
+                              <h3 class="mb-2">Unhappy?</h3>
+                              <p><%= button_to "Cancel my account", registration_path(resource_name), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, :class => "btn btn-danger", style:"width: 100%;height:70px;" %></p>
                           </div>
                           
                     </div>

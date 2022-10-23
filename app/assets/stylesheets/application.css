@@ -659,7 +659,7 @@ body {
   display: flex;
   position: static;
   justify-content: center;
-  bottom: 0px;
+  bottom: 10px;
 }
 .first {
   padding: 0;
@@ -698,4 +698,11 @@ body {
 
 .child-three {
   position: absolute;
+}
+
+.emptyMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }

@@ -72,6 +72,13 @@
 									</form>
 								</div>
 								<div class="child-two">
+										
+										<%if Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.count == 0%>
+										<div class="emptyMessage">
+											<div>Inbox empty. Contracts where you participate will be listed here</div>
+                    </div>
+										<%end%>
+										 
 									<tbody class="gridTable">
 										<% @contracts.each do |contract| %>
 										<tr class="contract">
@@ -87,7 +94,7 @@
 													<%end%>
 													<%if current_user && current_user == contract.owner%>
 														<td><%= link_to raw("<i class=\"fa fa-edit\"></i>"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
-														<td><%= button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :confirm => "Are you sure?", :method => :delete, data: {turbo: "false"}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
+														<td><%= button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
 													<%else%>
 														<td> </td>
 														<td> </td>
@@ -99,7 +106,7 @@
 									</tbody>
 								</div>
 								<div class="container pagination justify-content-center child-three" >
-									<%= will_paginate @contracts, remote: true %>
+									<%= paginate @contracts, remote: true %>
 								</div>
 							</table>
 						</div>
