@@ -1,5 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-1">
 <div class="row">
 	<!-- BEGIN INBOX -->
 	<div class="col-md-12">
@@ -9,14 +9,14 @@
 					<!-- BEGIN INBOX MENU -->
 					<div class="col mainColumn">
 						<div class="btn-group primaryButton" role="group" style="width: 325px; height:70px;">
-							<%= link_to raw("<i class=\"fa fa-pencil\"></i> New Contract"), new_user_contract_path(current_user), :class => "btn btn-outline-primary btn btn-block mr-2 buttonText", style:"width:120px;"%>
+							<%= link_to raw("<i class=\"fa fa-pencil\" style=\"margin-right:10px;\"></i> New Contract"), new_user_contract_path(current_user), :class => "btn btn-outline-info btn btn-block mr-2 buttonText", style:"width:120px;"%>
 						</div>
 						
 
 						<div class="folderBox">
 							<ul style="list-style: none;" class="folderList">
-								<div class="mt-5">
-									<%= link_to raw("<i class=\"fa fa-inbox folder\"></i> Inbox"), root_path, :method => :get, class: "btn btn-primary buttonText", style:"width:230px; height:60px;"%>
+								<div class="mt-4">
+									<%= link_to raw("<i class=\"fa fa-inbox folder fa-lg\" style=\"margin-right:10px;\"></i> Inbox"), root_path, :method => :get, class: "btn btn-primary buttonText", style:"width:230px; height:60px;"%>
 									<li class="mb-4">
 									</li>
 									<li class="mb-4"> 
@@ -60,13 +60,12 @@
 										<div class="input-group mainFilter">
 											<%= search_form_for @q, url: :user_contracts[current_user.id] do |f| %>
 												<div class="form-group">
-													<%= f.text_field :title_or_desc_cont, style: "height: 70px; width: 750px; margin-left: 5px;", placeholder: "Title, description...", class:"form-control" %>
+													<%= f.text_field :title_or_desc_or_kind_cont, style: "height: 70px; width: 780px; margin-left: 5px;", placeholder: "Title, description...", class:"form-control" %>
 												</div>
 											<%end%>
 											<span class="input-group-btn">
-												<button class="btn btn-primary" style= "height: 70px; width: 120px; margin-left:5px"><i class="fa fa-search"></i></button>
-											
-												<%= link_to raw("<i class=\"fa fa-rotate-left\"></i>"), root_path, class: "btn btn-secondary buttonText", style: "height: 70px; width: 80px;"%>
+												<button class="btn btn-primary" style= "height: 70px; width: 90px; margin-left:5px"><i class="fa fa-search fa-lg"></i></button>
+												<a class="btn btn-secondary" href="/" style= "height: 70px; width: 80px;"><i class="fa fa-rotate-left" style="margin-top:21px;"></i></a>
 											</span>
 										</div>			 
 									</form>

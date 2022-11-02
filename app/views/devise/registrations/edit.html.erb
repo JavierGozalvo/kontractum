@@ -7,7 +7,7 @@
       <div class="col-xl-8">
           <!-- Account details card-->
           <div class="card mb-4">
-              <div class="card-header h4"><%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), :back, :class => "btn btn-secondary", style:"margin: 5px" %> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Edit user password</div>
+              <div class="card-header h4"> Edit user password &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), :back, :class => "btn btn-secondary", style:"margin: 5px" %></div>
               <div class="card-body">
                   <form>
                       <div class="row mb-3">
@@ -29,20 +29,19 @@
                               <%= f.password_field :current_password, autocomplete: "new-password", class: "form-control", style:"width: 100%;height:50px;" %>
                           </div>
                     </div>
-                    <div class="row mb-4 justify-content-around buttonBox">
+                    <div class="row flex-row-reverse mr-2">
+                      <div class="">
+                        <%= f.submit "Update", :class => "btn btn-success buttonText", style: "width:100px;height:60px;margin:15px;" %>
+                      </div>
                       <div class="">
                         <%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
                       </div> 
-                      <div class="">
-                        <%= f.submit "Update", :class => "btn btn-success buttonText", style: "width:130px;height:60px;margin:15px;" %>
-                      </div>
                     </div>
-                    <div class="row mb-3">
-                          <div class="col-xl-12">
-                              <h3 class="mb-2">Unhappy?</h3>
-                              <p><%= button_to "Cancel my account", registration_path(resource_name), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, :class => "btn btn-danger", style:"width: 100%;height:70px;" %></p>
-                          </div>
-                          
+                    <div class="mt-4">
+                      <h3 class="ml-4 mt-5">
+                        Unhappy? 
+                        <small><%= link_to "Cancel my account", registration_path(resource_name), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, :class => "font-italic text-danger ml-5", style:"width: 100%;height:70px;" %></small>
+                      </h3>
                     </div>
                   </form>
               </div>
