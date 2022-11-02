@@ -7,84 +7,107 @@
 			<%end%>
 		</div>
 	<%end%>
-<div class="row marginLeft">
+<div class="row">
+      <div class="col-md-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4  mb-xl-5">
+                <div class="card-header h4">Additional information</div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                          <div class="col-md-12 mb-2">
+                              <label class=" mb-1" for="title">About you:</label>
+                              <%= f.text_area :about, class: "form-control", style:"height:120px;font-size:16px;" %>
+                          </div>
+                    </div>
+                    <div class="row mb-4">
+                          <div class="col-md-12 mb-2">
+                              <label class=" mb-1" for="title">Phone number</label>
+                              <%= f.text_field :phone, class: "form-control", style:"height:50px;font-size:16px;" %>
+                          </div>
+                    </div>
+                    <div class="row mb-4">
+                          <div class="col-md-12 mb-2">
+                              <label class=" mb-1" for="title">Website</label>
+                              <%= f.text_field :website, placeholder:"Twitter, LinkedIn, Blog...", class: "form-control", style:"height:50px;font-size:16px;" %>
+                          </div>
+                    </div>
+                    <div class="row mb-2">
+                          <div class="col-md-12">
+                              <label class=" mb-1" for="creation">Upload avatar</label>
+                              <div id="test">
+                                <div class="filebox">
+                                    <%= f.file_field :avatar, class: "form-field ml-3 mt-2", style:"width:auto;height:50px;cursor:pointer;position:absolute;"%>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+      </div>
       <div class="col-xl-8">
-          <!-- Account details card-->
-          <div class="card mb-4">
-              <div class="card-header h4"><%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), :back, :class => "btn btn-secondary", style:"margin: 5px" %> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Edit User Details</div>
+        <div class="card mb-4">
+              <div class="card-header h4">Edit User Details  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), :back, :class => "btn btn-secondary", style:"margin: 5px" %></div>
               <div class="card-body">
                   <form>
                       <div class="row mb-3">
-                          <!-- Form Group (first name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="title">Name</label>
-                              <%= f.text_field :name, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;" %>
+                              <%= f.text_field :name, autocomplete: "title", class: "form-control", style:"height:50px;font-size:16px;" %>
                           </div>
-                          <!-- Form Group (last name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="status">Surname</label>
-                              <%= f.text_field :surname, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;" %>
+                              <%= f.text_field :surname, autocomplete: "title", class: "form-control", style:"height:50px;font-size:16px;" %>
                           </div>
                       </div>
-                      <!-- Form Group (username)-->
                       <div class="row mb-3">
                           <div class="col-md-6">
                             <label class=" mb-1" for="description">DNI</label>
-                            <%= f.text_field :doc_id, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;" %>
+                            <%= f.text_field :doc_id, autocomplete: "title", class: "form-control", style:"height:50px;font-size:16px;" %>
                           </div>
                           <div class="col-md-6">
                               <label class=" mb-1" for="kind">Kind of Document</label>
-                              <%= f.select :doc_kind, [[],["DNI", :dni], ["Driver's license", :driver_license], ["Passport", :passport]], {}, {class: "form-control", style:"height:50px;"}%>
+                              <%= f.select :doc_kind, [[],["DNI", :dni], ["Driver's license", :driver_license], ["Passport", :passport]], {}, {class: "form-control", style:"height:50px;font-size:16px;"}%>
                           </div>
                       </div>
-                      <!-- Form Row-->
-                      <!-- Form Row        -->
                       <div class="row gx-3 mb-3">
-                          <!-- Form Group (organization name)-->
-                          <!-- Form Group (location)-->
                           <div class="col-md-6">
                               <label class="mb-1" for="payable">Email</label>
-                              <%= f.text_field :email, autofocus: true, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
+                              <%= f.text_field :email, autocomplete: "title", class: "form-control" , style:"height:50px;font-size:16px;"%>
                           </div>
 
                           <div class="col-md-6">
                               <label class=" mb-1" for="beneficiary">Address</label>
-                              <%= f.text_field :address, autofocus: true, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
+                              <%= f.text_field :address, autocomplete: "title", class: "form-control" , style:"height:50px;font-size:16px;"%>
                           </div>
                       </div>
         
-                      <!-- Form Row-->
                       <div class="row gx-3 mb-3">
-                          <!-- Form Group (phone number)-->
-                          
-                          <!-- Form Group (birthday)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="beneficiary">City</label>
-                              <%= f.text_field :city, autofocus: true, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
+                              <%= f.text_field :city, autocomplete: "title", class: "form-control" , style:"height:50px;font-size:16px;"%>
                           </div>
                           <div class="col-md-6">
                               <label class=" mb-1" for="beneficiary">Postalcode</label>
-                              <%= f.text_field :postalcode, autofocus: true, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
+                              <%= f.text_field :postalcode, autocomplete: "title", class: "form-control" , style:"height:50px;font-size:16px;"%>
                           </div>
                       </div>
-                      <!-- Save changes button-->
-                        <div class="row justify-content-around buttonBox">
-                          <div class="actions">
-                            <%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
-                          </div>
-                           
+                        <div class="row flex-row-reverse mr-2">
                           <div>
-                            <%= link_to raw("<i class=\"fa fa-edit\"></i> Edit"), :back, data: {turbo: "false"}, class: "btn btn-success buttonText", style: "width:150px;height:60px;margin:15px;"%>
+                            <%= button_tag( :class => "btn btn-success", style: "width:100px;height:60px;margin:15px;") do %>
+                             <i class="fa fa-edit" style="margin-right:5px;"></i> Edit
+                            <% end %>
                           </div>
-                         
-                      </div>
+                          <div class="actions">
+                            <%= link_to raw("<i class=\"fa fa-remove\" style=\"margin-right:5px;\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
+                          </div>
+                        </div>
                   </form>
               </div>
           </div>
-      </div>
+        </div>
     </div>
-      <% end %>
-      </div>
+  </div> 
+  <% end %>
   </div>
 </div>
 </div>

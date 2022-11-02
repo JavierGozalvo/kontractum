@@ -16,9 +16,10 @@ gem "faker"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "ransack"
-gem "will_paginate"
-gem "will_paginate-bootstrap4"
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 gem 'carrierwave', '~> 2.0'
+gem "mini_magick"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

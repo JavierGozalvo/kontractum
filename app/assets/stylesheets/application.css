@@ -659,7 +659,7 @@ body {
   display: flex;
   position: static;
   justify-content: center;
-  bottom: 0px;
+  bottom: 10px;
 }
 .first {
   padding: 0;
@@ -698,4 +698,38 @@ body {
 
 .child-three {
   position: absolute;
+}
+
+.emptyMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+#test .wrapper {
+  cursor: pointer;
+  border: 2px;
+  color: #666;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+.filebox {
+  border-style: solid;
+  border-width: 1px;
+  width: 100%;
+  height: 50px;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: #eaecef;
+  border-radius: 5px;
+  border-color: #c6ccd5;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  opacity: 0;
+  cursor: pointer;
+  margin-top: 50px;
 }

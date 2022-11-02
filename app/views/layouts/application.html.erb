@@ -18,7 +18,7 @@
   </head>
 
   <body class="">
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#282828;">
   <div class="container-fluid">
     <a class="navbar-brand"  style="margin-left: 120px;" href="">Kontractum <i class="bi bi-file-earmark-code fa-lg"></i></a>
     <span style="color: #FFFFFF"><%= notice%></span>
@@ -28,6 +28,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
           <%= link_to "Home", root_path, :class => "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Dashboard", user_path(current_user.id), :class => "nav-link"%>
         </li>
         <li class="nav-item">
           <%= link_to "Edit Profile", edit_profile_path, :class => "nav-link"%>
