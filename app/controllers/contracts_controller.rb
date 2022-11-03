@@ -17,6 +17,67 @@ class ContractsController < ApplicationController
     
   end
 
+  def accept
+    @contract = Contract.find(params[:contract_id])
+    @contract.update(is_accepted: true)
+    @contract.update(status: :approved)
+    redirect_to root_path
+  end
+
+  def reject
+    @contract = Contract.find(params[:contract_id])
+
+    if current_user == @contract.beneficiary
+      @contract.destroy
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract was rejected." }
+      format.json { head :no_content }
+    end
+  end
+
+  def modify
+    @contract = Contract.find(params[:contract_id])
+    @contract.update(status: :modification_requested)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Modification requested to #{@contract.owner.name}" }
+      format.json { head :no_content }
+    end
+  end
+
+  def accept_modification
+    @contract = Contract.find(params[:contract_id])
+    @contract.update(status: :modification_in_progress)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract modification accepted" }
+      format.json { head :no_content }
+    end
+  end
+
+  def reject_modification
+    @contract = Contract.find(params[:contract_id])
+    @contract.update(status: :archived)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract modification rejected" }
+      format.json { head :no_content }
+    end
+  end
+
+  def edited
+    @contract = Contract.find(params[:contract_id])
+    @contract.update(status: :edited)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract edited sucessfully." }
+      format.json { head :no_content }
+    end
+  end
+
+
   # GET /contracts/1 or /contracts/1.json
   def show
   end

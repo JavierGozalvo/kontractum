@@ -33,12 +33,12 @@
                           <!-- Form Group (first name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="title">Title</label>
-                              <span class="form-control" id="title" style="height:45px;" readonly><%= @contract.title%></span>
+                              <span class="form-control" id="title" style="height:50px;font-size:16px;" readonly><%= @contract.title%></span>
                           </div>
                           <!-- Form Group (last name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="status">Status</label>
-                              <span class="form-control" id="status" style="height:45px;" readonly><%= @contract.status%></span>
+                              <span class="form-control" id="status" style="height:50px;font-size:16px;" readonly><%= @contract.status%></span>
                           </div>
                       </div>
                       <!-- Form Group (username)-->
@@ -52,13 +52,13 @@
                           <!-- Form Group (organization name)-->
                           <div class="col-md-4">
                               <label class=" mb-1" for="kind">Kind</label>
-                              <span class="form-control" id="kind" style="height:45px;" readonly><%= @contract.kind%></span>
+                              <span class="form-control" id="kind" style="height:50px;font-size:16px;" readonly><%= @contract.kind%></span>
                           </div>
                           <!-- Form Group (location)-->
                           <div class="col-md-4">
                               <label class=" mb-1" for="payable">Payable?</label>
 
-                              <span class="form-control" id="payable" style="height:45px;" readonly>
+                              <span class="form-control" id="payable" style="height:50px;font-size:16px;" readonly>
                               <%if @contract.payable == false %> No 
                               <%elsif @contract.payable == true%> Yes 
                               <%end%>
@@ -66,7 +66,7 @@
                           </div>
                           <div class="col-md-4">
                               <label class=" mb-1" for="beneficiary">Beneficiary</label>
-                              <span class="form-control" id="beneficiary" style="height:45px;" readonly><%= @contract.beneficiary.name%></span>
+                              <span class="form-control" id="beneficiary" style="height:50px;font-size:16px;" readonly><%= @contract.beneficiary.name%></span>
                           </div>
                       </div>
         
@@ -74,11 +74,11 @@
                       <div class="row gx-3 mb-3">
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation"><i class=\"fa fa-download\"></i>Contract file path</label>
-                              <%=link_to raw("<i class=\"fa fa-download\"></i> Open Contract"), contract.contract_file.url, class:"btn btn-primary form-control", style:"height:45px;", :target => "_blank"%>
+                              <%=link_to raw("<i class=\"fa fa-download\"></i> Open Contract"), contract.contract_file.url, class:"btn btn-primary form-control", style:"height:50px;", :target => "_blank"%>
                           </div>
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation">Created At</label>
-                              <span class="form-control" id="creation" style="height:45px;" readonly><%= @contract.created_at.strftime("%d/%m/%Y")%></span>
+                              <span class="form-control" id="creation" style="height:50px;font-size:16px;" readonly><%= @contract.created_at.strftime("%d/%m/%Y")%></span>
                           </div>
                       </div>
                       
