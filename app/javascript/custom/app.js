@@ -12,6 +12,7 @@ const App = {
   contracts: {},
 
   init: async () => {
+    console.log("hello");
     await App.loadContract();
   },
 
