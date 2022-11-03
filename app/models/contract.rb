@@ -14,10 +14,10 @@ class Contract < ApplicationRecord
     validates :payable, inclusion: [true, false]
 
     enum :status, { expired: 0, 
-                    drafted: 1, 
+                    archived: 1, 
                     approved: 2, 
                     proposed: 3, 
                     modification_requested: 4,
-                    payment_in_progress: 5,
-                    paid: 6}
+                    modification_in_progress: 5,
+                    edited: 6}, default: :proposed
 end

@@ -18,18 +18,18 @@
                           <!-- Form Group (first name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="title">Title</label>
-                              <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;" %>
+                              <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "form-control", style:"height:50px;font-size:16px;" %>
                           </div>
                           <!-- Form Group (last name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="status">Status</label>
-                              <%= f.select :status, [[],["Approved", :approved], ['Drafted', :drafted],["Expired", :expired],["Proposed", :proposed],["Modification requested", :modification_requested],["In payment progress", :payment_in_progress],["Paid", :paid]], {}, {class: "form-control", style:"height:50px;"}%>
+                              <span class="form-control" id="status" style="height:50px;font-size:16px;" readonly><%= @contract.status%></span>
                           </div>
                       </div>
                       <!-- Form Group (username)-->
                       <div class="mb-3">
                           <label class=" mb-1" for="description">Description</label>
-                          <%= f.text_area :desc, autocomplete: "title", class: "form-control", style:"height:100px;" %>
+                          <%= f.text_area :desc, autocomplete: "title", class: "form-control", style:"height:100px;font-size:16px;" %>
                       </div>
                       <!-- Form Row-->
                       <!-- Form Row        -->
@@ -37,12 +37,12 @@
                           <!-- Form Group (organization name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="kind">Kind</label>
-                              <%= f.text_field :kind, autocomplete: "title", class: "form-control" , style:"height:50px;"%>
+                              <%= f.text_field :kind, autocomplete: "title", class: "form-control" , style:"height:50px;font-size:16px;"%>
                           </div>
                           <!-- Form Group (location)-->
                           <div class="col-md-6">
                               <label class="mb-1" for="payable">Payable?</label>
-                              <%= f.select :ampm, [["Yes", true], ['No', false]], {}, {class: "form-control", style:"height:50px;"}%>
+                              <%= f.select :ampm, [["Yes", true], ['No', false]], {}, {class: "form-control", style:"height:50px;font-size:16px;"}%>
                           </div>
                       </div>
         
@@ -51,24 +51,31 @@
                           <!-- Form Group (phone number)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="beneficiary">Beneficiary</label>
-                              <span class="form-control" id="beneficiary"  style="height:50px;"  readonly><%= @contract.beneficiary.name%></span>
+                              <span class="form-control" id="beneficiary"  style="height:50px;font-size:16px;"  readonly><%= @contract.beneficiary.name%></span>
                           </div>
                           <!-- Form Group (birthday)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation">Created At</label>
-                              <span class="form-control" id="creation"  style="height:50px;"readonly><%= @contract.created_at.strftime("%d/%m/%Y")%></span>
+                              <span class="form-control" id="creation"  style="height:50px;font-size:16px;"readonly><%= @contract.created_at.strftime("%d/%m/%Y")%></span>
                           </div>
                       </div>
                       <!-- Save changes button-->
                         <div class="row flex-row-reverse mr-2">
-                           <%if current_user && current_user == contract.owner%>
-                          <div>
-                            <%= button_to raw("<i class=\"fa fa-edit\" style=\"margin-right:5px;\"></i> Edit"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success buttonText", style: "width:100px;height:60px;margin:15px;"%>
-                          </div>
-                          <%end%>
-                          <div class="actions">
-                            <%= link_to raw("<i class=\"fa fa-remove\" style=\"margin-right:5px;\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
-                          </div>
+                            <%if current_user && current_user == contract.owner%>
+                            <div>
+                                <%= button_to raw("<i class=\"fa fa-edit\" style=\"margin-right:5px;\"></i> Edit"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success buttonText", style: "width:100px;height:60px;margin:15px;"%>
+                            </div>
+                            <%end%>
+
+                            <%if contract.modification_in_progress? && current_user && current_user == contract.beneficiary%>
+                            <div>
+                                <%= button_to raw("<i class=\"fa fa-edit\" style=\"margin-right:5px;\"></i> Edit"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success buttonText", style: "width:100px;height:60px;margin:15px;"%>
+                            </div>
+                            <%end%>
+
+                            <div class="actions">
+                                <%= link_to raw("<i class=\"fa fa-remove\" style=\"margin-right:5px;\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %>
+                            </div>
                       </div>
                   </form>
               </div>

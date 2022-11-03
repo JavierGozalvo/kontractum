@@ -1,20 +1,68 @@
 class ContractsController < ApplicationController
-  before_action :set_contract, only: %i[ show edit update destroy ]
+  before_action :set_contract, only: %i[ show edit update destroy accept reject modify accept_modification reject_modification edited]
   skip_before_action :verify_authenticity_token
 
   # GET /contracts or /contracts.json
   def index
-    
-
     @q = Contract.ransack(params[:q])
-    @contracts = @q.result(distinct: true)
-    #@contracts = Contract.all
-    #@contracts = @contracts.by_title(params[:title]) if params[:title].present?
-    #@contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?
-    # @contracts = @contracts.by_beneficiary(current_user.id) if params[:user_kind].present? && params[:user_kind] == "false"
-    
+    @contracts = @q.result(distinct: true) 
+  end
 
+  def accept
+    @contract.update(status: :approved)
     
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract was accepted." }
+      format.json { head :no_content }
+    end
+  end
+
+  def reject
+
+    if current_user == @contract.beneficiary
+      @contract.destroy
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract was rejected." }
+      format.json { head :no_content }
+    end
+  end
+
+  def modify
+    @contract.update(status: :modification_requested)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Modification requested to #{@contract.owner.name}" }
+      format.json { head :no_content }
+    end
+  end
+
+  def accept_modification
+    @contract.update(status: :modification_in_progress)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract modification accepted" }
+      format.json { head :no_content }
+    end
+  end
+
+  def reject_modification
+    @contract.update(status: :archived)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract modification rejected" }
+      format.json { head :no_content }
+    end
+  end
+
+  def edited
+    @contract.update(status: :edited)
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Contract edited sucessfully." }
+      format.json { head :no_content }
+    end
   end
 
   # GET /contracts/1 or /contracts/1.json
