@@ -96,8 +96,11 @@
 														<td><%= link_to raw("<i class=\"fa fa-edit\"></i>"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Edit Contract"%></td>
 														<td><%= button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Delete Contract"%></td>
 													<%elsif contract.proposed? && current_user && current_user == contract.beneficiary%>
-														<td><%= button_to raw("<i class=\"fa fa-check\"></i>"), user_contract_accept_path(current_user, contract.id), form: {data: {turbo_confirm: 'Accept contract?'}}, class: "btn btn-warning EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Accept Contract"%></td>
+														<td><%= button_to raw("<i class=\"fa fa-check\"></i>"), user_contract_accept_path(current_user, contract.id), form: {data: {turbo_confirm: 'Accept contract??'}},class: "btn btn-warning EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
 														<td><%= button_to raw("<i class=\"fa fa-close\"></i>"), user_contract_reject_path(current_user, contract.id), form: {data: {turbo_confirm: 'Reject contract?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Reject Contract"%></td>
+													<%elsif contract.proposed? && current_user && current_user == contract.owner%>
+														<td></td>
+														<td><%=button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Delete Contract"%></td>
 													<%elsif contract.approved? && current_user && current_user == contract.beneficiary%>
 													<td> </td>
 													<td><%= button_to raw("<i class=\"fa fa-question\"></i>"), user_contract_modify_path(current_user, contract.id), form: {data: {turbo_confirm: 'Request contract modification?'}}, class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Ask for modify"%></td>
