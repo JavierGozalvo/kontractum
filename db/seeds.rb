@@ -19,7 +19,7 @@ Contract.destroy_all
 # 							)
 # 	end
 
-100.times do |n|
+50.times do |n|
   Contract.create(title: Faker::Hacker.abbreviation,
                   desc: Faker::Hacker.say_something_smart,
                   kind: Faker::Hacker.adjective,
