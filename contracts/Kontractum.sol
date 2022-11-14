@@ -5,30 +5,34 @@ contract Kontractum {
 
 	struct Contract{
 		uint id;
-		string title;
+		string fileHash;
+    string owner;
+    string beneficiary;
 	}
 	mapping(uint => Contract) public contracts;
 
   event ContractCreated(
     uint id,
-    string title
+    string fileHash,
+    string owner,
+    string beneficiary
   );
 
-  constructor() public {
-    createContract("Check out dappuniversity.com");
-  }
-
-  function createContract(string memory _title)
+  function createContract(string memory _fileHash, string memory _owner, string memory _beneficiary)
         public
     {
         contractCount++;
         contracts[contractCount] = Contract(
             contractCount,
-            _title
+            _fileHash,
+            _owner,
+            _beneficiary
         );
         emit ContractCreated(
             contractCount,
-            _title
+            _fileHash,
+            _owner,
+            _beneficiary
         );
     }
 }
