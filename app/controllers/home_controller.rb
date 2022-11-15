@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 	def index
     @q = Contract.ransack(params[:q])
     @contracts = @q.result(distinct: true)
-    @contracts = @contracts.page(params[:page]).order(created_at: :desc).limit(7)
+    @contracts = @contracts.page(params[:page]).order(created_at: :desc).per(22)
     # @contracts = Contract.all
     # @contracts = @contracts.by_title(params[:title]) if params[:title].present?
     # @contracts = @contracts.by_payable(params[:payable]) if params[:payable].present?

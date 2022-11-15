@@ -7,7 +7,7 @@
                 <div class="card-header h4">Owner information</div>
                 <div class="card-body">
                     <!-- Profile picture help block-->
-                    <div class="font-italic text-muted mb-4">Contract owner: <%= @contract.owner.name%></div>
+                    <div class="font-italic text-muted mb-4">Contract owner: <span id="contract_owner"><%= @contract.owner.name%></span></div>
                     <div class="font-italic text-muted mb-4">User active since: <%= @contract.owner.created_at.strftime('%d/%m/%Y')%></div>
                     <%if current_user && current_user == contract.owner%>
                       <div class="font-italic text-muted mb-4">Total contracts created: <%= Contract.select{|contract| contract.owner == current_user}.count%></div>
@@ -33,7 +33,7 @@
                           <!-- Form Group (first name)-->
                           <div class="col-md-6">
                               <label class=" mb-1" for="title">Title</label>
-                              <span class="form-control" id="title" style="height:50px;font-size:16px;" readonly><%= @contract.title%></span>
+                              <span class="form-control" id="contract_title" style="height:50px;font-size:16px;" readonly><%= @contract.title%></span>
                           </div>
                           <!-- Form Group (last name)-->
                           <div class="col-md-6">
@@ -66,7 +66,7 @@
                           </div>
                           <div class="col-md-4">
                               <label class=" mb-1" for="beneficiary">Beneficiary</label>
-                              <span class="form-control" id="beneficiary" style="height:50px;font-size:16px;" readonly><%= @contract.beneficiary.name%></span>
+                              <span class="form-control" id="contract_beneficiary" style="height:50px;font-size:16px;" readonly><%= @contract.beneficiary.name%></span>
                           </div>
                       </div>
         
@@ -74,7 +74,7 @@
                       <div class="row gx-3 mb-3">
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation"><i class=\"fa fa-download\"></i>Contract file path</label>
-                              <%=link_to raw("<i class=\"fa fa-download\"></i> Open Contract"), contract.contract_file.url, class:"btn btn-primary form-control", style:"height:50px;", :target => "_blank"%>
+                              <%=link_to raw("<i class=\"fa fa-download\"></i> Open Contract"), contract.contract_file.url, class:"btn btn-primary form-control", style:"height:50px;", :target => "_blank"%><span id="contract_url" hidden><%= @contract.contract_file.url%></span>
                           </div>
                           <div class="col-md-6">
                               <label class=" mb-1" for="creation">Created At</label>

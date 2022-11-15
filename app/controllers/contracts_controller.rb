@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-  before_action :set_contract, only: %i[ show edit update destroy accept reject modify accept_modification reject_modification edited]
+  before_action :set_contract, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token
 
   # GET /contracts or /contracts.json
@@ -9,6 +9,7 @@ class ContractsController < ApplicationController
   end
 
   def accept
+    @contract = Contract.find(params[:contract_id])
     @contract.update(status: :approved)
     
     respond_to do |format|
@@ -18,6 +19,7 @@ class ContractsController < ApplicationController
   end
 
   def reject
+    @contract = Contract.find(params[:contract_id])
 
     if current_user == @contract.beneficiary
       @contract.destroy
@@ -30,6 +32,7 @@ class ContractsController < ApplicationController
   end
 
   def modify
+    @contract = Contract.find(params[:contract_id])
     @contract.update(status: :modification_requested)
 
     respond_to do |format|
@@ -39,6 +42,7 @@ class ContractsController < ApplicationController
   end
 
   def accept_modification
+    @contract = Contract.find(params[:contract_id])
     @contract.update(status: :modification_in_progress)
 
     respond_to do |format|
@@ -48,6 +52,7 @@ class ContractsController < ApplicationController
   end
 
   def reject_modification
+    @contract = Contract.find(params[:contract_id])
     @contract.update(status: :archived)
 
     respond_to do |format|
@@ -57,6 +62,7 @@ class ContractsController < ApplicationController
   end
 
   def edited
+    @contract = Contract.find(params[:contract_id])
     @contract.update(status: :edited)
 
     respond_to do |format|
