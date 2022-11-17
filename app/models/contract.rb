@@ -3,11 +3,13 @@ class Contract < ApplicationRecord
     belongs_to :owner, class_name: "User", foreign_key: "owner", required: true
     belongs_to :beneficiary, class_name: "User", foreign_key: "beneficiary", required: true
 
-    scope :by_title, -> (title){where(title: title)}
-    scope :by_payable, -> (payable){where(payable: payable)}
-    scope :by_owner, -> (owner_id){where(owner: owner_id)}
-    scope :by_beneficiary, -> (beneficiary_id){where(beneficiary: beneficiary_id)}
     scope :by_status, -> (status){where(status: status)}
+    scope :by_beneficiary, -> (beneficiary){where(beneficiary: beneficiary)}
+    scope :by_owner, -> (owner){where(owner: owner)}
+
+    def self.ransackable_scopes(auth_object = nil)
+        [:by_status]
+    end
 
     validates :title, presence: true, length: {minimum: 3}
     validates :kind, presence: true
@@ -19,5 +21,8 @@ class Contract < ApplicationRecord
                     proposed: 3, 
                     modification_requested: 4,
                     modification_in_progress: 5,
-                    edited: 6}, default: :proposed
+                    edited: 6,
+                    tokenization_requested: 7,
+                    tokenizable: 8,
+                    tokenized: 9}, default: :proposed
 end
