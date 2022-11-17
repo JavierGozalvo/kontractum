@@ -6,33 +6,29 @@ contract Kontractum {
 	struct Contract{
 		uint id;
 		string fileHash;
-    string owner;
-    string beneficiary;
+    string userFirm;
 	}
 	mapping(uint => Contract) public contracts;
 
   event ContractCreated(
     uint id,
     string fileHash,
-    string owner,
-    string beneficiary
+    string userFirm
   );
 
-  function createContract(string memory _fileHash, string memory _owner, string memory _beneficiary)
+  function createContract(string memory _fileHash, string memory _userFirm)
         public
     {
         contractCount++;
         contracts[contractCount] = Contract(
             contractCount,
             _fileHash,
-            _owner,
-            _beneficiary
+            _userFirm
         );
         emit ContractCreated(
             contractCount,
             _fileHash,
-            _owner,
-            _beneficiary
+            _userFirm
         );
     }
 }
