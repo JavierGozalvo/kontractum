@@ -43,8 +43,8 @@
                         <i>Modification</i>
                         <i>in progress...</i>
                     <%elsif contract.edited? && current_user && current_user == contract.owner%>
-                        <%= button_to raw("Accept edit <i class=\"fa fa-check\"></i>"), user_contract_accept_modification_path(current_user, contract.id), form: {data: {turbo_confirm: 'Accept contract edit?'}},class: "btn btn-warning EditDeleteButtons mb-3", style: "height: 45px; width: 100%;"%>
-                        <%= button_to raw("Reject edit <i class=\"fa fa-close\"></i>"), user_contract_reject_modification_path(current_user, contract.id), form: {data: {turbo_confirm: 'Reject contract edit?'}}, class: "btn btn-danger EditDeleteButtons mb-3", style: "height: 45px; width: 100%;", title:"Reject Contract"%>
+                        <%= button_to raw("Accept edit <i class=\"fa fa-check\"></i>"), user_contract_accept_path(current_user, contract.id), form: {data: {turbo_confirm: 'Accept contract edit?'}},class: "btn btn-warning EditDeleteButtons mb-3", style: "height: 45px; width: 100%;"%>
+                        <%= button_to raw("Reject edit <i class=\"fa fa-close\"></i>"), user_contract_reject_path(current_user, contract.id), form: {data: {turbo_confirm: 'Reject contract edit?'}}, class: "btn btn-danger EditDeleteButtons mb-3", style: "height: 45px; width: 100%;", title:"Reject Contract"%>
                     <%elsif contract.edited? && current_user && current_user == contract.beneficiary%>
                         <i>Waiting for <%= contract.owner.name %> approval</i>
                     <%elsif contract.tokenization_requested? && current_user && current_user == contract.owner%>
@@ -149,9 +149,8 @@
                           </div>
                           <%end%>
                       </div>
-
-                      <span id="contract_url" hidden><%= @contract.contract_file.url%></span>
-                      <span id="contract_user" hidden><%= current_user.name%></span>
+                      <span id="contract_binary" hidden><%= @contract.contract_file.read%></span>
+                      <span id="contract_user_email" hidden><%= current_user.email%></span>
                   </form>
               </div>
           </div>

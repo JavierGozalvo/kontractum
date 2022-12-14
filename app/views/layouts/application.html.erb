@@ -20,10 +20,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="" onLoad="my_code();">
+  <body class="" onLoad="my_code();" style="background-color: hsl(0, 0%, 96%)">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#282828;">
   <div class="container-fluid">
-    <a class="navbar-brand"  style="margin-left: 120px;" href="">Kontractum <i class="bi bi-file-earmark-code fa-lg"></i></a>
+    <a class="navbar-brand"  style="margin-left: 120px;" href=""><img src="../../assets/logo.png" style="width:165px;height:25px;"/></a>
     <span style="color: #FFFFFF"><%= notice%></span>
     <span style="color: #FFFFFF"><%= alert%></span>
     <%if user_signed_in?%>
@@ -1664,19 +1664,19 @@
 
           setTimeout(function () { 
 
-            const urlSpan = document.getElementById("contract_url");
-            const contract_url = urlSpan.textContent;
-            console.log(contract_url);
-
-            const userSpan = document.getElementById("contract_user");
+            const userSpan = document.getElementById("contract_user_email");
             const contract_user = userSpan.textContent;
             console.log(contract_user);
 
-            var encrypted = CryptoJS.SHA256(contract_title);
-            var encrypted_url = encrypted.toString();
-            console.log(encrypted_url);
+            const fileSpan = document.getElementById("contract_binary");
+            const contract_file = fileSpan.textContent;
+            console.log(contract_file);
+            
+            var encryption = CryptoJS.SHA256(contract_file);
+            var encrypted_file = encryption.toString();
+            console.log(encrypted_file);
 
-            kontractum.methods.createContract(encrypted_url, contract_user).send({
+            kontractum.methods.createContract(encrypted_file, contract_user).send({
                         from: account
             }).on("receipt", function(receipt) {
               window.alert("Transacction confirmed!");

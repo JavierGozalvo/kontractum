@@ -1,12 +1,6 @@
 <div class="container-xl px-1">
   <%= form_with model: contract, url: user_contracts_path,data: { turbo: false } do |f| %>
-    <%if contract.errors.any? %>
-      <div>
-        <% contract.errors.full_messages.each do |message|%>
-          <div><%= message %></div>
-        <%end%>
-      </div>
-    <%end%>
+    
     <div class="row marginLeft">
         <div class="col-xl-8">
           <div class="card mb-3">
@@ -64,11 +58,23 @@
                             
                           <div><%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %></div>
                       </div>
+          <%if contract.errors.any? %>
+            <div>
+              <% contract.errors.full_messages.each do |message|%>
+                <div class="alert alert-danger" role="alert" style="position:absolute;left:243px;top:6px;width:450px;"><%= message %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <%end%>
+            </div>
+          <%end%>
           </form>
               </div>
           </div>
           
         </div>
     </div>
+    
   <% end %>
 </div>
