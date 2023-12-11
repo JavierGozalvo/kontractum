@@ -23,7 +23,7 @@ Contract.destroy_all
   Contract.create(title: Faker::Hacker.abbreviation,
                   desc: Faker::Hacker.say_something_smart,
                   kind: Faker::Hacker.adjective,
-                  status: Faker::Number.between(from: 0, to: 6),
+                  status: 3,
                   owner: User.find(rand(1..10)),
                   beneficiary: User.find(rand(1..10)),
                   payable: Faker::Boolean.boolean)

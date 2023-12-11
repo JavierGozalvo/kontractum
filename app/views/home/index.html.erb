@@ -1,5 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container-fluid mt-1">
+<div class="container-fluid">
 <div class="row">
 	<!-- BEGIN INBOX -->
 	<div class="col-md-12">
@@ -19,32 +19,38 @@
 									<%= link_to raw("<i class=\"fa fa-inbox folder fa-lg\" style=\"margin-right:10px;\"></i> Inbox"), root_path, :method => :get, class: "btn btn-primary buttonText", style:"width:230px; height:60px;"%>
 									<li class="mb-4">
 									</li>
-									<li class="mb-4"> 
-										<%= link_to raw("<i class=\"fa fa-mail-reply folder\"></i> Received"),q: {beneficiary: current_user.id}, class: "btn btn-primary"%>
+									<li class="mb-3"> 
+										<%= link_to raw("<i class=\"mr-2 fa fa-mail-reply folder\"></i> Received"),q: {beneficiary: current_user.id}%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-mail-forward folder\"></i> Sent"), q: {owner: current_user.id}%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-mail-forward folder\"></i> Sent"), q: {owner: current_user.id}%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-exclamation-triangle folder\"></i> Expired"), q: {status: 0 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-folder folder\"></i> Archived"), q: {status: 1 }%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-folder folder\"></i> Archived"), q: {status: 1 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-check folder\"></i> Approved"), q: {status: 2 }%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-check folder\"></i> Approved"), q: {status: 2 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-3 fa fa-question \"></i>  Proposed"), q: {status: 3 }%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-question \"></i>  Proposed"), q: {status: 3 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-pencil-square-o\"></i> Modification Requested"), q: {status: 4 }%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-pencil-square-o\"></i> Modification Requested"), q: {status: 4 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-clock-o\"></i> Modification in progress"), q: {status: 5 }%>
 									</li>
-									<li class="mb-4">
-										<%= link_to raw("<i class=\"fa fa-clock-o\"></i> Modification in progress"), q: {status: 5 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-plus-circle\"></i> Edited"), q: {status: 6 }%>
 									</li>
-									<li class="">
-										<%= link_to raw("<i class=\"fa fa-plus-circle\"></i> Edited"), q: {status: 6 }%>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-comments-o\"></i> Tokenization requested"), q: {status: 7 }%>
+									</li>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-chain-broken\"></i> Tokenizable"), q: {status: 8 }%>
+									</li>
+									<li class="mb-3">
+										<%= link_to raw("<i class=\"mr-2 fa fa-chain\"></i> Tokenized"), q: {status: 9 }%>
 									</li>
 								</div>
 							</ul>
@@ -58,9 +64,9 @@
 								<div class="search-form child-one">
 									<form action="#">
 										<div class="input-group mainFilter">
-											<%= search_form_for @q, url: :user_contracts[current_user.id] do |f| %>
+											<%= search_form_for @q, url: :user_contracts_path[current_user.id] do |f| %>
 												<div class="form-group">
-													<%= f.text_field :title_or_desc_or_kind_cont, style: "height: 70px; width: 780px; margin-left: 5px;", placeholder: "Title, description...", class:"form-control" %>
+													<%= f.search_field :title_or_desc_or_kind_cont, style: "height: 70px; width: 780px; margin-left: 5px;", placeholder: "Title, description...", class:"form-control" %>
 												</div>
 											<%end%>
 											<span class="input-group-btn">
@@ -71,57 +77,67 @@
 									</form>
 								</div>
 								<div class="child-two">
-										
-										<%if Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.count == 0%>
-										<div class="emptyMessage">
-											<div>Inbox empty. Contracts where you participate will be listed here</div>
-                    </div>
-										<%end%>
-										 
+								<%if Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.count != 0%>
+									<thead>
+										<tr>
+											<th><%= sort_link(@q, :title, "Title")%></th>
+											<th class="text-secondary">Description</th>
+											<th class="text-secondary">Status</th>
+											<th><%= sort_link(@q, :created_at, "Date", default_order: :desc)%></th>
+											<th></th>
+										</tr>
+									</thead>
+								<%end%>
 									<tbody class="gridTable">
 										<% @contracts.each do |contract| %>
 										<tr class="contract">
-												<%if (current_user && current_user == contract.beneficiary) || (current_user && current_user == contract.owner) || current_user.admin?%>
 													<td class="title">
-															<div style="width:100px;"><%= link_to contract.title, user_contract_path(current_user, contract.id), data: {turbo: "false"}%></div>
+															<div style="text-overflow: ellipsis; overflow: hidden; width: 160px; height: 2.8em; white-space: nowrap;"><%= link_to contract.title, user_contract_path(current_user, contract.id), data: {turbo: "false"}%></div>
 													</td>
-													<td class="description text-muted"><div style="text-overflow: ellipsis; overflow: hidden; width: 300px; height: 2.8em; white-space: nowrap;"><%= contract.desc%></div></td>
-													<td class="status text-muted"><div class="text-info"><small><%= contract.status%></small></div></td>
-													<%if Date.today.to_time.to_i - contract.created_at.to_time.to_i > 86400%>
-														<td class="time"><%= contract.created_at.strftime('%d/%m/%Y')%></td>
+													<td class="description text-secondary"><div style="text-overflow: ellipsis; overflow: hidden; width: 280px; height: 2.8em; white-space: nowrap;"><%= contract.desc%></div></td>
+													<td class="status"><div class="text-info" style="width:153px;"><small><%= contract.status%></small></div></td>
+													<%if Date.today.to_time.to_i - contract.created_at.to_time.to_i > 50000%>
+														<td class="time" style="width:500px;"><%= contract.created_at.strftime('%d/%m/%Y')%></td>
 													<%else%>
-														<td class="time"><%= contract.created_at.strftime('%H:%M')%></td>
+														<td class="time" style="width:500px;"><%= contract.created_at.strftime('%H:%M')%></td>
 													<%end%>
 													<%if contract.approved? && current_user && current_user == contract.owner%>
-														<td><%= link_to raw("<i class=\"fa fa-edit\"></i>"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-success EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Edit Contract"%></td>
-														<td><%= button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Delete Contract"%></td>
-													<%elsif contract.proposed? && current_user && current_user == contract.beneficiary%>
-														<td><%= button_to raw("<i class=\"fa fa-check\"></i>"), user_contract_accept_path(current_user, contract.id), form: {data: {turbo_confirm: 'Accept contract??'}},class: "btn btn-warning EditDeleteButtons", style: "height: 45px; width: 60px;"%></td>
-														<td><%= button_to raw("<i class=\"fa fa-close\"></i>"), user_contract_reject_path(current_user, contract.id), form: {data: {turbo_confirm: 'Reject contract?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Reject Contract"%></td>
-													<%elsif contract.proposed? && current_user && current_user == contract.owner%>
-														<td></td>
-														<td><%=button_to raw("<i class=\"fa fa-trash-o\"></i>"), user_contract_url(current_user, contract.id), :method => :delete, form: {data: {turbo_confirm: 'Contract delete confirmation. Are you sure?'}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Delete Contract"%></td>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px", title:"Contract info"%></td>
 													<%elsif contract.approved? && current_user && current_user == contract.beneficiary%>
-													<td> </td>
-													<td><%= button_to raw("<i class=\"fa fa-question\"></i>"), user_contract_modify_path(current_user, contract.id), form: {data: {turbo_confirm: 'Request contract modification?'}}, class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Ask for modify"%></td>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.proposed? && current_user && current_user == contract.beneficiary%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.proposed? && current_user && current_user == contract.owner%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
 													<%elsif contract.modification_requested? && current_user && current_user == contract.beneficiary%>
-													<td> <i><small>Modification</small></i></td>
-													<td> <i><small>requested...</small></i></td>
-													<%elsif contract.modification_requested? && current_user && current_user == contract.owner%>
-														<td><%= button_to raw("<i class=\"fa fa-plus-circle\"></i>"), user_contract_accept_modification_path(current_user, contract.id), form: {data: {turbo_confirm: 'Modification requested by ' + contract.beneficiary.name + ". Accept?"}}, class: "btn btn-warning EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Accept modification"%></td>
-														<td><%= button_to raw("<i class=\"fa fa-minus-circle\"></i>"), user_contract_reject_modification_path(current_user, contract.id), form: {data: {turbo_confirm: 'Modification requested by ' + contract.beneficiary.name + ". Reject?"}}, class: "btn btn-danger EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Reject modification"%></td>
-													<%elsif contract.modification_in_progress? && current_user && current_user == contract.beneficiary%>
-														<td><%= link_to raw("<i class=\"fa fa-pencil\"></i>"), edit_user_contract_path(current_user, contract.id), data: {turbo: "false"}, class: "btn btn-warning EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Edit Contract"%></td>
-														<td><%= button_to raw("<i class=\"fa fa-check\"></i>"), user_contract_edited_path(current_user, contract.id), form: {data: {turbo_confirm: 'Finish modification?'}}, class: "btn btn-success EditDeleteButtons", style: "height: 45px; width: 60px;", title:"Finish edit"%></td>
-													<%elsif contract.modification_in_progress? && current_user && current_user == contract.owner%>
 														<td> <i><small>Modification</small></i></td>
-														<td> <i><small>in progress...</small></i></td>
+													<%elsif contract.modification_requested? && current_user && current_user == contract.owner%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.modification_in_progress? && current_user && current_user == contract.beneficiary%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.modification_in_progress? && current_user && current_user == contract.owner%>
+														<td> <i><small style="margin-left:35px;">Waiting for <%= contract.beneficiary.name%> response</i></td>
+													<%elsif contract.edited? && current_user && current_user == contract.beneficiary%>
+														<td style="width:600px;"> <i><small style="margin-left:0px;">Waiting <%= contract.owner.name%> approval</i></td>
+													<%elsif contract.edited? && current_user && current_user == contract.owner%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.tokenization_requested? && current_user && current_user == contract.beneficiary%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.tokenization_requested? && current_user && current_user == contract.owner%>
+														<td> <i><small style="margin-left:35px;">Waiting for <%= contract.beneficiary.name%> response</i></td>
+													<%elsif contract.tokenizable? && current_user && current_user == contract.beneficiary%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
+													<%elsif contract.tokenizable? && current_user && current_user == contract.owner%>
+														<td style="width:350px;"><%= link_to raw("Action needed <i class=\"ml-3 fa fa-exclamation\"></i>"), user_contract_path(current_user, contract.id), class: "btn btn-primary EditDeleteButtons", style: "height: 45px; width: 210px;", title:"Contract info"%></td>
 													<%else%>
 														<td> </td>
-														<td> </td>
 													<%end%>
-												<%end%>
 											<%end%>
+											<%if Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.count == 0%>
+												<div class="emptyMessage">
+													<div>Inbox empty. Contracts where you participate will be listed here</div>
+												</div>
+											<%end%>	
 											<br/>
 										</tr>
 									</tbody>

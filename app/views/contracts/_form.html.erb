@@ -1,12 +1,6 @@
 <div class="container-xl px-1">
   <%= form_with model: contract, url: user_contracts_path,data: { turbo: false } do |f| %>
-    <%if contract.errors.any? %>
-      <div>
-        <% contract.errors.full_messages.each do |message|%>
-          <div><%= message %></div>
-        <%end%>
-      </div>
-    <%end%>
+    
     <div class="row marginLeft">
         <div class="col-xl-8">
           <div class="card mb-3">
@@ -38,22 +32,22 @@
                           </div>
                           <div class="col-md-4">
                               <label class=" mb-1" for="beneficiary">Beneficiary</label>
-                              <%= f.select :beneficiary, User.all.collect{|u| [u.email, u.id]}, {}, {class: "form-control", style:"height:50px;font-size:16px;"}%>
+                              <%= f.text_field :beneficiary, class: "form-control", style:"height:50px;font-size:16px;"%>
                           </div>
                       </div>
         
-                      <div class="row gx-3">
+                      <div class="row justify-content-between">
                           <div class="col-md-6">
                               <label for="creation">Upload contract <i class="fa fa-paperclip" style="margin-left:5px;"></i> </label>
                             <div id="uploader">
-                                <div class="filebox">
-                                    <%= f.file_field :contract_file, class: "form-field ml-3 mt-2", style:"width:322px;height:50px;cursor:pointer;position:absolute;font-size:16px;"%>
+                                <div class="filebox" style="width:450px;">
+                                    <%= f.file_field :contract_file, class: "ml-3 mt-2", style:"width:100%;height:50px;cursor:pointer;font-size:16px;"%>
                                 </div>
                             </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <label class="mb-2" for="creation">Created At</label>
-                              <span class="form-control" id="creation"  style="height:50px;font-size:16px;"readonly><%= Date.today%></span>
+                              <span class="form-control" id="creation"  style="width:200px;height:50px;font-size:16px;"readonly><%= Date.today%></span>
                           </div>
                       </div>
                       
@@ -64,11 +58,23 @@
                             
                           <div><%= link_to raw("<i class=\"fa fa-remove\"></i> Cancel"), root_path, :class => "btn btn-secondary buttonText", style:"width:100px;height:60px;margin: 15px" %></div>
                       </div>
+          <%if contract.errors.any? %>
+            <div>
+              <% contract.errors.full_messages.each do |message|%>
+                <div class="alert alert-danger" role="alert" style="position:absolute;left:243px;top:6px;width:450px;"><%= message %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <%end%>
+            </div>
+          <%end%>
           </form>
               </div>
           </div>
           
         </div>
     </div>
+    
   <% end %>
 </div>

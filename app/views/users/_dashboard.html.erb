@@ -82,7 +82,7 @@
             <div class="card-body">
             <ul class="nav nav-pills nav-pills-primary nav-justified">
                 <li class="">
-                  <%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), :back, :class => "btn btn-secondary", style:"margin-right:20px;"%>
+                  <%= link_to raw("<i class=\"fa fa-arrow-left\"></i> Go Back"), root_path, :class => "btn btn-secondary", style:"margin-right:20px;"%>
                 </li>
                 <li class="nav-item">
                     <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active show"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
@@ -119,18 +119,79 @@
                             <table class="table table-hover table-striped">
                                 <tbody>
                                     <%if Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.count == 0%>
-                                    No recent activity. <br/> <br/>
-                                    Info will display when you participate in any contract.
-                                    <%end%>                 
-																		<% @contracts.last(5).each do |contract| %> 
-																		  
-																		<%if contract.owner == current_user || contract.beneficiary == current_user%>                
-                                    <tr>
-                                        <td>
-                                            <span>Created contract <strong><%=contract.title%></strong> sent to <strong><%=contract.beneficiary.name%></strong> at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
-                                        </td>
-                                    </tr>
-																		<%end%>
+                                      No recent activity. <br/> <br/>
+                                      Info will display when you create or participate in any contract.
+                                    <%else%>                 
+                                      <% Contract.select{|contract| contract.owner == current_user || contract.beneficiary == current_user}.last(5).reverse_each do |contract| %> 
+                                        
+                                      <%if contract.proposed? && contract.beneficiary == current_user%>                
+                                      <tr>
+                                          <td>
+                                              <span>Contract <strong><%=contract.title%></strong> received from <strong><%=contract.owner.name%></strong> at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.proposed? && contract.owner == current_user%>                
+                                      <tr>
+                                          <td>
+                                              <span>Created contract <strong><%=contract.title%></strong> sent to <strong><%=contract.beneficiary.name%></strong> at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.tokenizable?%>
+                                        <tr>
+                                          <td>
+                                              <span>Contract  <strong><%=contract.title%></strong> is waiting to be firmed by <strong><%=contract.beneficiary.name%></strong> and <strong><%=contract.owner.name%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.tokenized?%>
+                                        <tr>
+                                          <td>
+                                              <span>Contract  <strong><%=contract.title%></strong> uploaded successfully to blockchain at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.approved?%>
+                                        <tr>
+                                          <td>
+                                              <span>Contract  <strong><%=contract.title%></strong> approved at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.archived?%>
+                                        <tr>
+                                          <td>
+                                              <span>Contract <strong><%=contract.title%></strong> archived at <strong><%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.modification_requested? && contract.beneficiary == current_user%>
+                                        <tr>
+                                          <td>
+                                              <span>You requested a modification for contract <strong><%= contract.title%></strong> to <%= contract.owner.name%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.modification_requested? && contract.owner == current_user%>
+                                        <tr>
+                                          <td>
+                                              <span>Modification requested to contract <strong><%= contract.title%></strong> by <%= contract.beneficiary.name%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.modification_in_progress?%>
+                                        <tr>
+                                          <td>
+                                              <span>Modification for contract <strong><%= contract.title%></strong> is in progress by <strong><%= contract.beneficiary.name%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.edited?%>
+                                        <tr>
+                                          <td>
+                                              <span>Contract <strong><%= contract.title%></strong> modified, waiting for <strong><%= contract.owner.name%> approval</strong></span>
+                                          </td>
+                                      </tr>
+                                      <%elsif contract.tokenization_requested?%>
+                                        <tr>
+                                          <td>
+                                              <span>Tokenization requested to <%= contract.beneficiary.name%> for contract <strong><%= contract.title%></strong> at <%=contract.created_at.strftime("%d/%m/%Y")%></strong></span>
+                                          </td>
+                                      </tr>
+                                      <%end%>
+                                    <%end%>
 																	<%end%>
                                 </tbody>
                             </table>

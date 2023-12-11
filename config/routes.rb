@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       post :accept_modification
       post :reject_modification
       post :edited
+      post :tokenize
+      post :accept_tokenization
+      post :reject_tokenization
+      post :tokenizable
     end
   end
 
